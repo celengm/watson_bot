@@ -106,14 +106,12 @@ if (!is_null($events['events'])) {
                             'https://preview.ibb.co/ffjgSb/c700x420.jpg'
                         ];
 
-                        $random_keys = array_rand($nameMenu,1);
+                        $random_keys = array_rand($pictureMenu,1);
 
-                        $textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);
+                        /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
-                        $imageOutput = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
-                        $httpClient = new CurlHTTPClient($channel_token);
-                        $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
-                        $response = $bot->replyMessage($replyToken, $imageOutput);
+                        $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
+
 
                     }
 
