@@ -126,7 +126,7 @@ if (!is_null($events['events'])) {
             $replyToken = $event['replyToken'];
 
             // Greeting
-            $respMessage = 'Hello This is WATSON';
+            $respMessage = 'สวัสดีนะ รู้สึกยินดีมากๆ ที่ได้เธอเป็นเพื่อน 5555 มีอะไรคุยกันได้น้า';
 
             $httpClient = new CurlHTTPClient($channel_token);
             $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
