@@ -5,6 +5,7 @@ require_once('./vendor/autoload.php');
 // Namespace
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot;
+use LINE\LINEBot\MessageBuilder;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder;
@@ -19,40 +20,41 @@ $events = json_decode($content, true);
 
 $textMessageBuilder = '';
 
-function validNameCheckIn($receiveText){
+function validNameCheckIn($receiveText)
+{
 
-    if($receiveText == 'วัติเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณวัติ เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'ปืนเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปืน เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'ตู่เช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณตู่ เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'ฟลุ๊คเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณฟลุ๊ค เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'นาถเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('นาถเด็กเกรียน2017-2560 เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'เบียร์เช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณเอกชัย เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'ปิงเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปิง เช็คอินที่เวลา '.date('H:i'));
-    }else if ($receiveText == 'แคทเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแคทร้อยผัว เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'ผึ้งเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณผึ้งจอฟ้า เช็คอินที่เวลา '.date('H:i'));
-    }else if ($receiveText == 'มะปรางเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณมะปราง เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'หวานเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณนักข่าวหวาน เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'กิ่งเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณ PM กิ่ง เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'ฟาริสเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณฟาริส เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'แต้งเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแต้ง เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'แยมเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแยม เช็คอินที่เวลา '.date('H:i'));
-    }else if($receiveText == 'แอ๋มเช็คอิน'){
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแอ๋ม เช็คอินที่เวลา '.date('H:i'));
+    if ($receiveText == 'วัติเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณวัติ เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'ปืนเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปืน เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'ตู่เช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณตู่ เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'ฟลุ๊คเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณฟลุ๊ค เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'นาถเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('นาถเด็กเกรียน2017-2560 เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'เบียร์เช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณเอกชัย เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'ปิงเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปิง เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'แคทเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแคทร้อยผัว เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'ผึ้งเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณผึ้งจอฟ้า เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'มะปรางเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณมะปราง เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'หวานเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณนักข่าวหวาน เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'กิ่งเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณ PM กิ่ง เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'ฟาริสเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณฟาริส เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'แต้งเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแต้ง เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'แยมเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแยม เช็คอินที่เวลา ' . date('H:i'));
+    } else if ($receiveText == 'แอ๋มเช็คอิน') {
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแอ๋ม เช็คอินที่เวลา ' . date('H:i'));
     }
 
 }
@@ -72,26 +74,27 @@ if (!is_null($events['events'])) {
 
                     $textMessageBuilder = validNameCheckIn($receiveText);
 
-                    if ($receiveText == '1') {
+                    if ($receiveText == 'บริษัทอยู่ที่ไหน') {
 
-                        $textMessageBuilder = new TextMessageBuilder('ว่าไงนี้คือข้อความของคุณ ' . $receiveText);
+                        $address = 'อาคารซอฟท์แวร์ปาร์ค ชั้น 3 ห้อง 303 ถนน เจ้าฟ้าตะวันตก ตำบล วิชิต อำเภอเมืองภูเก็ต ภูเก็ต 83000';
+                        $textMessageBuilder = new MessageBuilder\LocationMessageBuilder('บริษัท เลี่ยนอุดม จำกัด',$address,'7.8749316','98.3631689');
 
-                    } else if ($receiveText == '2') {
+                    } else if ($receiveText == 'ขอวาร์ปหน่อย') {
                         // Reply message
-                        $originalContentUrl = 'https://preview.ibb.co/g4pTOG/Pets.jpg';
-                        /*$respMessage = 'ขณะนี้เวลา '. date('H:i')  . $event['message']['text'];*/
-                        $previewImageUrl = 'https://image.ibb.co/dd7Mcb/Pets.jpg';
 
-                        $textMessageBuilder = new ImageMessageBuilder($originalContentUrl, $previewImageUrl);
+                        $warps = ['IPZ-405','STAR-248','SNIS-228','MVSD-255','BCDP-086','WANZ-540','PPPD-537'];
+                        $random_keys = array_rand($warps,1);
+
+                        $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ '.$warps[$random_keys[0]]);
 
                     } else if ($receiveText == '3') {
 
-                        $actions = array (
+                        $actions = array(
                             New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("yes", "1"),
                             New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("no", "2")
                         );
 
-                        $buttonBuilder = new TemplateBuilder\ConfirmTemplateBuilder('confirm message',$actions);
+                        $buttonBuilder = new TemplateBuilder\ConfirmTemplateBuilder('confirm message', $actions);
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("confirm message", $buttonBuilder);
 
                     }
@@ -131,7 +134,6 @@ if (!is_null($events['events'])) {
         }
     }
 }
-
 
 
 echo "OK";
