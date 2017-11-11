@@ -6,6 +6,7 @@ require_once('./vendor/autoload.php');
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
 $channel_token = '7En2HqJRS/m2SQIoxGyE3G6gwAGT9LqgrG9H5vMjDjtbOrXzVWRleZ+flxM9yZ/OTNMb99iUcvCTtAWrbX0IM0eRrX4yyLA8Xqlm9RlLuy1vKSCTwwN/smvluF+EC0Vd7OffEpakSvidWoIq0R/sCQdB04t89/1O/w1cDnyilFU=';
 $channel_secret = 'a13f45009f928d96922ccff8d5390091';
@@ -25,12 +26,15 @@ if (!is_null($events['events'])) {
                     $replyToken = $event['replyToken'];
 
                     // Reply message
-                    $respMessage = 'ขณะนี้เวลา '. date('H:i')  . $event['message']['text'];
+                    $originalContentUrl = 'https://preview.ibb.co/g4pTOG/Pets.jpg';
+                        /*$respMessage = 'ขณะนี้เวลา '. date('H:i')  . $event['message']['text'];*/
+                    $previewImageUrl = 'https://image.ibb.co/dd7Mcb/Pets.jpg';
 
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
-                    $textMessageBuilder = new TextMessageBuilder($respMessage);
+
+                    $textMessageBuilder = new ImageMessageBuilder($originalContentUrl,$previewImageUrl);
                     $response = $bot->replyMessage($replyToken, $textMessageBuilder);
                     break;
             }
