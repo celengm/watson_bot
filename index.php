@@ -85,7 +85,7 @@ if (!is_null($events['events'])) {
                         $warps = ['IPZ-405','STAR-248','SNIS-228','MVSD-255','BCDP-086','WANZ-540','PPPD-537'];
                         $random_keys = array_rand($warps,1);
 
-                        $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ '.$warps[$random_keys[0]]);
+                        $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ '.$warps[$random_keys]);
 
                     } else if ($receiveText == '3') {
 
