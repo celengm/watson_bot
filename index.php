@@ -44,25 +44,14 @@ if (!is_null($events['events'])) {
 
                     } else if ($receiveText == '3') {
 
-                        $action = json_encode([
-                            "type" => "postback",
-                            "label" => "Buy",
-                            "data" => "action=buy&itemid=123"
-                            ],
-                            [
-                                "type" => "postback",
-                                "label" => "Add to cart",
-                                "data" => "action=add&itemid=123"
-                            ],
-                            [
-                                "type" => "uri",
-                                "label" => "View detail",
-                                "uri" => "http://example.com/page/123"
-                            ]);
+                        $actions = array (
+                            New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "ans=y"),
+                            New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N")
+                        );
 
-                        $arrayAction = [$action];
 
-                        $textMessageBuilder = new ButtonTemplateBuilder('สวัสดีครับ', 'มีอะไรให้ช่วยเหลือมั้ยครับ', 'https://preview.ibb.co/g4pTOG/Pets.jpg', $arrayAction);
+                        $buttonBuilder = new TemplateBuilder\ConfirmTemplateBuilder('confirm message',$actions);
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("confirm message", $buttonBuilder);
 
                     }
 
