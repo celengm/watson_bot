@@ -115,6 +115,11 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
 
+                    }else if (strpos($receiveText, 'สอนบอท') !== false) {
+                        $x_tra = str_replace("สอนบอท", "", $receiveText);
+                        $pieces = explode("|", $x_tra);
+                        $_question = str_replace("[", "", $pieces[0]);
+                        $_answer = str_replace("]", "", $pieces[1]);
                     }
 
                     $httpClient = new CurlHTTPClient($channel_token);
