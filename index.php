@@ -103,7 +103,10 @@ if (!is_null($events['events'])) {
                             'https://preview.ibb.co/fzUsYG/3_BRYQWE2877_E24_F6136_D56lv.jpg',
                             'https://preview.ibb.co/cHWH0w/1391753959_81_o.jpg',
                             'https://preview.ibb.co/drneDG/oqydw0nhqquy5_VQs_MVh_o.jpg',
-                            'https://preview.ibb.co/ffjgSb/c700x420.jpg'
+                            'https://preview.ibb.co/ffjgSb/c700x420.jpg',
+                            'https://preview.ibb.co/de1gtG/1418114529_DSCF14121_o.jpg',
+                            'https://preview.ibb.co/djxzfw/1420811272_e32_o.jpg',
+                            'https://preview.ibb.co/ny7zfw/kao_man_kai_09.jpg'
                         ];
 
                         $random_keys = array_rand($pictureMenu,1);
@@ -111,7 +114,6 @@ if (!is_null($events['events'])) {
                         /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
                         $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
-
 
                     }
 
