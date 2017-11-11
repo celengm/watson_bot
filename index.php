@@ -44,11 +44,10 @@ if (!is_null($events['events'])) {
 
                     } else if ($receiveText == '3') {
 
-                        $arrayAction = [
-                            [
-                                "type" => "postback",
-                                "label" => "Buy",
-                                "data" => "action=buy&itemid=123"
+                        $action = json_encode([
+                            "type" => "postback",
+                            "label" => "Buy",
+                            "data" => "action=buy&itemid=123"
                             ],
                             [
                                 "type" => "postback",
@@ -59,9 +58,9 @@ if (!is_null($events['events'])) {
                                 "type" => "uri",
                                 "label" => "View detail",
                                 "uri" => "http://example.com/page/123"
-                            ]
+                            ]);
 
-                        ];
+                        $arrayAction = [$action];
 
                         $textMessageBuilder = new ButtonTemplateBuilder('สวัสดีครับ', 'มีอะไรให้ช่วยเหลือมั้ยครับ', 'https://preview.ibb.co/g4pTOG/Pets.jpg', $arrayAction);
 
