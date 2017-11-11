@@ -17,6 +17,18 @@ $channel_secret = 'a13f45009f928d96922ccff8d5390091';
 $content = file_get_contents('php://input');
 $events = json_decode($content, true);
 
+$textMessageBuilder = '';
+
+function validNameCheckIn($receiveText){
+
+    if($receiveText == 'วัติเช็คอิน'){
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณวัติ เช็คอินที่เวลา '.date('H:i'));
+    }else if($receiveText == 'ปืนเช็คอิน'){
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปืน เช็คอินที่เวลา '.date('H:i'));
+    }
+
+}
+
 if (!is_null($events['events'])) {
 
     foreach ($events['events'] as $event) {
@@ -29,6 +41,8 @@ if (!is_null($events['events'])) {
 
                     // Get replyToken
                     $replyToken = $event['replyToken'];
+
+                    $textMessageBuilder = validNameCheckIn($receiveText);
 
                     if ($receiveText == '1') {
 
@@ -90,4 +104,8 @@ if (!is_null($events['events'])) {
     }
 }
 
+
+
 echo "OK";
+
+
