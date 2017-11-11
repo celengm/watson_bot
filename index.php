@@ -22,19 +22,28 @@ if (!is_null($events['events'])) {
         if ($event['type'] == 'message') {
             switch ($event['message']['type']) {
                 case 'text':
+
+                    $receiveText = $event['message']['text'];
+
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
-                    // Reply message
-                    $originalContentUrl = 'https://preview.ibb.co/g4pTOG/Pets.jpg';
-                        /*$respMessage = 'ขณะนี้เวลา '. date('H:i')  . $event['message']['text'];*/
-                    $previewImageUrl = 'https://image.ibb.co/dd7Mcb/Pets.jpg';
+                    if($receiveText == '1'){
 
+                        $textMessageBuilder = new TextMessageBuilder('ว่าไงนี้คือข้อความของคุณ '.$receiveText);
+
+                    }else{
+                        // Reply message
+                        $originalContentUrl = 'https://preview.ibb.co/g4pTOG/Pets.jpg';
+                        /*$respMessage = 'ขณะนี้เวลา '. date('H:i')  . $event['message']['text'];*/
+                        $previewImageUrl = 'https://image.ibb.co/dd7Mcb/Pets.jpg';
+
+                        $textMessageBuilder = new ImageMessageBuilder($originalContentUrl,$previewImageUrl);
+
+                    }
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
-
-                    $textMessageBuilder = new ImageMessageBuilder($originalContentUrl,$previewImageUrl);
                     $response = $bot->replyMessage($replyToken, $textMessageBuilder);
                     break;
             }
