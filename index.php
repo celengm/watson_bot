@@ -45,8 +45,8 @@ if (!is_null($events['events'])) {
                     } else if ($receiveText == '3') {
 
                         $actions = array (
-                            New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "1"),
-                            New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "2")
+                            New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "text 1"),
+                            New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "text 2")
                         );
 
                         $buttonBuilder = new TemplateBuilder\ConfirmTemplateBuilder('confirm message',$actions);
