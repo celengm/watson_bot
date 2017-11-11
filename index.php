@@ -87,15 +87,33 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ '.$warps[$random_keys]);
 
-                    } else if ($receiveText == '3') {
+                    } else if ($receiveText == 'เที่ยงนี้กินอะไรดี') {
 
-                        $actions = array(
-                            New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("yes", "1"),
-                            New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("no", "2")
-                        );
+                        $columns = array();
+                        $nameMenu = ['ข้าวผัดหมูกรอบ','กระเพราไข่ดาว','คะน้าหมูกรอบ','หมูทอดกระเทียม, หมูทอด',
+                            'ผัดซีอิ้ว','ผัดผักรวม','ผัดพริกหยวก','ผัดพริกเผา','KFC','Pizza'
+                            ];
+                        $pictureMenu = [
+                            'https://image.ibb.co/b4jy7b/3_CL3_MZ976_FA2_AB862_F8_AA9mx.jpg',
+                            'https://image.ibb.co/n1gd7b/1398137376_o.jpg',
+                            'https://image.ibb.co/iWCeDG/480x280.jpg',
+                            'https://image.ibb.co/mTC1Sb/a75.jpg',
+                            'https://preview.ibb.co/i3GBSb/min13.jpg',
+                            'https://preview.ibb.co/eoLufw/d49f8fb8_6744_44fe_ab02_e16fe49fc2d9.jpg',
+                            'https://preview.ibb.co/fzUsYG/3_BRYQWE2877_E24_F6136_D56lv.jpg',
+                            'https://preview.ibb.co/cHWH0w/1391753959_81_o.jpg',
+                            'https://preview.ibb.co/drneDG/oqydw0nhqquy5_VQs_MVh_o.jpg',
+                            'https://preview.ibb.co/ffjgSb/c700x420.jpg'
+                        ];
 
-                        $buttonBuilder = new TemplateBuilder\ConfirmTemplateBuilder('confirm message', $actions);
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("confirm message", $buttonBuilder);
+                        $random_keys = array_rand($nameMenu,1);
+
+                        $textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);
+
+                        $imageOutput = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
+                        $httpClient = new CurlHTTPClient($channel_token);
+                        $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
+                        $response = $bot->replyMessage($replyToken, $imageOutput);
 
                     }
 
@@ -123,7 +141,7 @@ if (!is_null($events['events'])) {
             $replyToken = $event['replyToken'];
 
             // Greeting
-            $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม';
+            $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม จ้า';
 
             $httpClient = new CurlHTTPClient($channel_token);
             $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
