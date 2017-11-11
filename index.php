@@ -49,7 +49,6 @@ if (!is_null($events['events'])) {
                             New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N")
                         );
 
-
                         $buttonBuilder = new TemplateBuilder\ConfirmTemplateBuilder('confirm message',$actions);
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("confirm message", $buttonBuilder);
 
