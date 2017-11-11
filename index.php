@@ -6,8 +6,8 @@ use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 
-$channel_token = '1v2OUa9tuMIiDhEg57ANbsRaBDbBGP9nlCC+Dpvt5HrsQ+LqcrImWPUBkH8re/pwqxv56d15kZeMoU/vQ0zuzPFlbhFM7AhRMZwLr SkLdcjbFurwXGOyHLt8MdgzLfAe7r0BsQV5cATlUanW3OgJewdB04t89/1O/w1cDnyilFU=';
-$channel_secret = '9b2c7349ea939ef723a3cb453d774c86';
+$channel_token = '7En2HqJRS/m2SQIoxGyE3G6gwAGT9LqgrG9H5vMjDjtbOrXzVWRleZ+flxM9yZ/OTNMb99iUcvCTtAWrbX0IM0eRrX4yyLA8Xqlm9RlLuy1vKSCTwwN/smvluF+EC0Vd7OffEpakSvidWoIq0R/sCQdB04t89/1O/w1cDnyilFU=';
+$channel_secret = 'a13f45009f928d96922ccff8d5390091';
 
 // Get message from Line API
 $content = file_get_contents('php://input');
@@ -33,6 +33,32 @@ if (!is_null($events['events'])) {
                     $response = $bot->replyMessage($replyToken, $textMessageBuilder);
                     break;
             }
+
+        } else if ($event['type'] == 'follow') {
+
+            $replyToken = $event['replyToken'];
+
+            // Greeting
+            $respMessage = 'Hello This is WATSON';
+
+            $httpClient = new CurlHTTPClient($channel_token);
+            $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
+
+            $textMessageBuilder = new TextMessageBuilder($respMessage);
+            $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+
+        } else if ($event['type'] == 'join') {
+
+            $replyToken = $event['replyToken'];
+
+            // Greeting
+             $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม';
+
+            $httpClient = new CurlHTTPClient($channel_token);
+            $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
+
+            $textMessageBuilder = new TextMessageBuilder($respMessage);
+            $response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
         }
     }
