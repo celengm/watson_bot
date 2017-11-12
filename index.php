@@ -81,46 +81,44 @@ if (!is_null($events['events'])) {
                     $queryFindQustion->bindValue(':my_question', $receiveText);
                     $queryFindQustion->execute();
 
-                    if($queryFindQustion->rowCount() > 0){
+                    if ($queryFindQustion->rowCount() > 0) {
 
                         $qID = $queryFindQustion->fetchColumn();
 
                         $sql = "SELECT * FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
                         $queryFindAnswer = $db_connection->prepare($sql);
-                        $queryFindAnswer->bindValue('id_question',$qID);
+                        $queryFindAnswer->bindValue('id_question', $qID);
                         $queryFindAnswer->execute();
 
-                        while($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC))
-                        {
+                        while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
 
                             $answer_send = $row['name_answer'];
-                            $textMessageBuilder = new TextMessageBuilder($answer_send.'');
+                            $textMessageBuilder = new TextMessageBuilder($answer_send . '');
 
                         }
 
                     }
 
 
-
                     if ($receiveText == 'บริษัทอยู่ที่ไหน') {
 
                         $address = 'อาคารซอฟท์แวร์ปาร์ค ชั้น 3 ห้อง 303 ถนน เจ้าฟ้าตะวันตก ตำบล วิชิต อำเภอเมืองภูเก็ต ภูเก็ต 83000';
-                        $textMessageBuilder = new MessageBuilder\LocationMessageBuilder('บริษัท เลี่ยนอุดม จำกัด',$address,'7.8749316','98.3631689');
+                        $textMessageBuilder = new MessageBuilder\LocationMessageBuilder('บริษัท เลี่ยนอุดม จำกัด', $address, '7.8749316', '98.3631689');
 
                     } else if ($receiveText == 'ขอวาร์ปหน่อย') {
                         // Reply message
 
-                        $warps = ['IPZ-405','STAR-248','SNIS-228','MVSD-255','BCDP-086','WANZ-540','PPPD-537'];
-                        $random_keys = array_rand($warps,1);
+                        $warps = ['IPZ-405', 'STAR-248', 'SNIS-228', 'MVSD-255', 'BCDP-086', 'WANZ-540', 'PPPD-537'];
+                        $random_keys = array_rand($warps, 1);
 
-                        $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ '.$warps[$random_keys]);
+                        $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ ' . $warps[$random_keys]);
 
                     } else if ($receiveText == 'เที่ยงนี้กินอะไรดี') {
 
                         $columns = array();
-                        $nameMenu = ['ข้าวผัดหมูกรอบ','กระเพราไข่ดาว','คะน้าหมูกรอบ','หมูทอดกระเทียม, หมูทอด',
-                            'ผัดซีอิ้ว','ผัดผักรวม','ผัดพริกหยวก','ผัดพริกเผา','KFC','Pizza'
-                            ];
+                        $nameMenu = ['ข้าวผัดหมูกรอบ', 'กระเพราไข่ดาว', 'คะน้าหมูกรอบ', 'หมูทอดกระเทียม, หมูทอด',
+                            'ผัดซีอิ้ว', 'ผัดผักรวม', 'ผัดพริกหยวก', 'ผัดพริกเผา', 'KFC', 'Pizza'
+                        ];
                         $pictureMenu = [
                             'https://image.ibb.co/b4jy7b/3_CL3_MZ976_FA2_AB862_F8_AA9mx.jpg',
                             'https://image.ibb.co/n1gd7b/1398137376_o.jpg',
@@ -137,13 +135,13 @@ if (!is_null($events['events'])) {
                             'https://preview.ibb.co/ny7zfw/kao_man_kai_09.jpg'
                         ];
 
-                        $random_keys = array_rand($pictureMenu,1);
+                        $random_keys = array_rand($pictureMenu, 1);
 
                         /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
-                        $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
+                        $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]);
 
-                    }else if (strpos($receiveText, 'สอนสไมล์') !== false) {
+                    } else if (strpos($receiveText, 'สอนสไมล์') !== false) {
                         $x_tra = str_replace("สอนสไมล์", "", $receiveText);
                         $pieces = explode("|", $x_tra);
                         $_question = str_replace("[", "", $pieces[0]);
@@ -156,37 +154,37 @@ if (!is_null($events['events'])) {
 
                         $dateToday = date('Y-m-d');
                         // เช็คว่ามีในฐานข้อมูลมั้ย
-                        if($queryFindQustion->rowCount() == 0){
+                        if ($queryFindQustion->rowCount() == 0) {
 
 
                             $sql = "INSERT INTO questions(name_question,created_by,created_at) VALUES (:name_question,:createby,:createat)";
                             $saveQuestion = $db_connection->prepare($sql);
-                            $saveQuestion->bindValue(':name_question',$_question);
-                            $saveQuestion->bindValue(':createby',$user_line_id);
-                            $saveQuestion->bindValue(':createat',$dateToday);
+                            $saveQuestion->bindValue(':name_question', $_question);
+                            $saveQuestion->bindValue(':createby', $user_line_id);
+                            $saveQuestion->bindValue(':createat', $dateToday);
                             $saveQuestion->execute();
 
 
                             $sql = "INSERT INTO answer(id_question,name_answer,created_by,created_at) VALUES (:id_question,:name_answer,:created_by,:todaydate)";
                             $saveAnswer = $db_connection->prepare($sql);
-                            $saveAnswer->bindValue(':id_question',$db_connection->lastInsertId());
-                            $saveAnswer->bindValue(':name_answer',$_answer);
-                            $saveAnswer->bindValue(':created_by',$user_line_id);
-                            $saveAnswer->bindValue(':todaydate',$dateToday);
+                            $saveAnswer->bindValue(':id_question', $db_connection->lastInsertId());
+                            $saveAnswer->bindValue(':name_answer', $_answer);
+                            $saveAnswer->bindValue(':created_by', $user_line_id);
+                            $saveAnswer->bindValue(':todaydate', $dateToday);
                             $saveAnswer->execute();
 
                             $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนสไมล์');
 
-                        }else{
+                        } else {
                             // เอา ID คำถาม
                             $questionID = $queryFindQustion->fetchColumn();
 
                             $sql = "INSERT INTO answer(id_question,name_answer,created_by,created_at) VALUES (:id_question,:name_answer,:created_by,:todaydate)";
                             $saveAnswer = $db_connection->prepare($sql);
-                            $saveAnswer->bindValue(':id_question',$questionID);
-                            $saveAnswer->bindValue(':name_answer',$_answer);
-                            $saveAnswer->bindValue(':created_by',1);
-                            $saveAnswer->bindValue(':todaydate',$dateToday);
+                            $saveAnswer->bindValue(':id_question', $questionID);
+                            $saveAnswer->bindValue(':name_answer', $_answer);
+                            $saveAnswer->bindValue(':created_by', 1);
+                            $saveAnswer->bindValue(':todaydate', $dateToday);
                             $saveAnswer->execute();
 
                             $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนสไมล์');
@@ -194,7 +192,7 @@ if (!is_null($events['events'])) {
                         }
 
 
-                    }else if($receiveText == 'ซื้อเสื้อหน่อย'){
+                    } else if ($receiveText == 'ซื้อเสื้อหน่อย') {
 
                         $columns = array();
                         $img_url = [
@@ -205,17 +203,31 @@ if (!is_null($events['events'])) {
                         ];
 
 
-                        for($i=0;$i<4;$i++) {
+                        for ($i = 0; $i < 4; $i++) {
                             $actions = array(
-                                new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("ดูสินค้า","https://www.facebook.com/pg/sabuycentral/shop/?rid=189993954752890&rt=39")
+                                new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("ดูสินค้า", "https://www.facebook.com/pg/sabuycentral/shop/?rid=189993954752890&rt=39")
                             );
-                            $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("เสื้อยืด", "เสื้อผ้าใส่สบายราคาถูก", $img_url[$i] , $actions);
+                            $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("เสื้อยืด", "เสื้อผ้าใส่สบายราคาถูก", $img_url[$i], $actions);
                             $columns[] = $column;
                         }
 
                         $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("แนะนำเสื้อจากร้าน Sabuy Central เลยจ้า", $carousel);
 
+                    } else if ($receiveText == 'สวัสดีสไมล์สอนพี่ๆหน่อย') {
+                        $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม จ้า 
+                                น้องชื่อสไมล์นะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า 
+                                วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ)
+                                - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน) 
+                                - บริษัทอยู่ที่ไหน 
+                                - เที่ยงนี้กินอะไรดี 
+                                - ขอวาร์ปหน่อย 
+                                - ซื้อเสื้อหน่อย 
+                                - สอนสไมล์พูดด้วยนะคะ สอนสไมล์[คำถาม|คำตอบ] เช่น สอนสไมล์[ใครหน้าตาดีที่สุด|คุณวัติจ้า]
+                                - สวัสดีสไมล์สอนพี่ๆหน่อย
+                            ';
+
+                        $textMessageBuilder = new TextMessageBuilder($respMessage);
                     }
 
 
