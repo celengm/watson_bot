@@ -309,7 +309,7 @@ if (!is_null($events['events'])) {
                         /*$ex_plodeArray = explode('=',$receiveText);*/
 
 
-                        $textMessageBuilder = MessageBuilder\MultiMessageBuilder();
+                        $textMessageBuilder = new MessageBuilder\MultiMessageBuilder();
                         $textMessageBuilder->add(new TextMessageBuilder('อะไรกันไม่รู้จริงหรอ'))
                             ->add(new TextMessageBuilder('2ไง'));
 
