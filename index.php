@@ -120,6 +120,8 @@ if (!is_null($events['events'])) {
                         $pieces = explode("|", $x_tra);
                         $_question = str_replace("[", "", $pieces[0]);
                         $_answer = str_replace("]", "", $pieces[1]);
+
+                        $textMessageBuilder = new TextMessageBuilder('ข้อความที่สอน '.$_question.'ข ้อความที่ตอบ '.$_answer);
                     }
 
                     $httpClient = new CurlHTTPClient($channel_token);
