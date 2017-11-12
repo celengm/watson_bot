@@ -304,11 +304,23 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
 
+                    }else if(strpos($receiveText, '1+1=เท่าไหร่?') !== false){
+
+                        /*$ex_plodeArray = explode('=',$receiveText);*/
+
+
+                        $textMessageBuilder = MessageBuilder\MultiMessageBuilder();
+                        $textMessageBuilder->add(new TextMessageBuilder('อะไรกันไม่รู้จริงหรอ'))
+                            ->add(new TextMessageBuilder('2ไง'));
+
                     }
 
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
+
+
+
                     $response = $bot->replyMessage($replyToken, $textMessageBuilder);
                     break;
             }

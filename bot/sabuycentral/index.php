@@ -2,6 +2,17 @@
 date_default_timezone_set("Asia/Bangkok");
 require_once '../../config/connection.php';
 
+/*$exampleText = '1+1=เท่าไหร่?';
+
+if(strpos($exampleText, '=เท่าไหร่?') !== false){
+    $ex_plodeArray = explode('=',$exampleText);
+
+    $ex_plodeOperand = explode('+',$ex_plodeArray[0]);
+
+    echo $result.'<br><br>';
+
+}*/
+
 
 $receiveText = 'วัติ';
 
