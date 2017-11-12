@@ -107,7 +107,6 @@ if (!is_null($events['events'])) {
 
                     }
 
-
                     if ($receiveText == 'บริษัทอยู่ที่ไหน') {
 
                         $address = 'อาคารซอฟท์แวร์ปาร์ค ชั้น 3 ห้อง 303 ถนน เจ้าฟ้าตะวันตก ตำบล วิชิต อำเภอเมืองภูเก็ต ภูเก็ต 83000';
@@ -236,6 +235,10 @@ if (!is_null($events['events'])) {
                             ';
 
                         $textMessageBuilder = new TextMessageBuilder($respMessage);
+                    }else if($receiveText == '555' || $receiveText == 'โครตฮา' || $receiveText == 'ผ่าม' || $receiveText == 'จางในจาง'){
+
+                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder(1,10);
+
                     }
 
 
