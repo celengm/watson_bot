@@ -150,10 +150,11 @@ if (!is_null($events['events'])) {
                         ];
 
                         $random_keys = array_rand($pictureMenu, 1);
+                        $random_answerText = array_rand($answerText,1);
 
                         $textMessageBuilder = new MessageBuilder\MultiMessageBuilder();
                         $textMessageBuilder->add(new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]))
-                            ->add(new TextMessageBuilder($nameMenu[$random_keys].' '.$answerText[$random_keys]));
+                            ->add(new TextMessageBuilder($nameMenu[$random_keys].' '.$answerText[$random_answerText]));
 
                         /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
