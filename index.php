@@ -142,11 +142,18 @@ if (!is_null($events['events'])) {
                             'https://preview.ibb.co/ny7zfw/kao_man_kai_09.jpg'
                         ];
 
+                        $answerText = [
+                            'กินมั้ยคะ',
+                            'จะกินกับหนูมั้ยคะ',
+                            'อร่อยนะคะ',
+                            'ลองเลยค่ะวันนี้ สไมล์แนะนำจ้า'
+                        ];
+
                         $random_keys = array_rand($pictureMenu, 1);
 
                         $textMessageBuilder = new MessageBuilder\MultiMessageBuilder();
                         $textMessageBuilder->add(new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]))
-                            ->add(new TextMessageBuilder($nameMenu[$random_keys].' กินมั้ยคะ'));
+                            ->add(new TextMessageBuilder($nameMenu[$random_keys].' '.$answerText[$random_keys]));
 
                         /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
