@@ -191,7 +191,7 @@ if (!is_null($events['events'])) {
                             $saveAnswer = $db_connection->prepare($sql);
                             $saveAnswer->bindValue(':id_question', $questionID);
                             $saveAnswer->bindValue(':name_answer', $_answer);
-                            $saveAnswer->bindValue(':created_by', 1);
+                            $saveAnswer->bindValue(':created_by', $user_line_id);
                             $saveAnswer->bindValue(':todaydate', $dateToday);
                             $saveAnswer->execute();
 
