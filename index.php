@@ -194,6 +194,28 @@ if (!is_null($events['events'])) {
                         }
 
 
+                    }else if($receiveText == 'ซื้อเสื้อหน่อย'){
+
+                        $columns = array();
+                        $img_url = [
+                            'https://preview.ibb.co/kVnSJG/3.jpg',
+                            'https://image.ibb.co/b9XBdG/183.jpg',
+                            'https://preview.ibb.co/jqQxJG/153.jpg',
+                            'https://preview.ibb.co/n9ojyG/006.jpg'
+                        ];
+
+
+                        for($i=0;$i<4;$i++) {
+                            $actions = array(
+                                new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("ดูสินค้า","https://www.facebook.com/pg/sabuycentral/shop/?rid=189993954752890&rt=39")
+                            );
+                            $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("เสื้อยืด", "เสื้อผ้าใส่สบายราคาถูก", $img_url[$i] , $actions);
+                            $columns[] = $column;
+                        }
+
+                        $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("แนะนำเสื้อจากร้าน Sabuy Central เลยจ้า", $carousel);
+
                     }
 
 
@@ -221,7 +243,15 @@ if (!is_null($events['events'])) {
             $replyToken = $event['replyToken'];
 
             // Greeting
-            $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม จ้า';
+            $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม จ้า <br>
+                น้องชื่อสไมล์นะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า <br>
+                วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ)<br>
+                - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน) <br>
+                - บริษัทอยู่ที่ไหน
+                - เที่ยงนี้กินอะไรดี
+                - ขอวาร์ปหน่อย
+                - สอนสไมล์พูดด้วยนะคะ สอนสไมล์[คำถาม|คำตอบ] เช่น สอนสไมล์[ใครหน้าตาดีที่สุด|คุณวัติจ้า]
+            ';
 
             $httpClient = new CurlHTTPClient($channel_token);
             $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
