@@ -4,11 +4,11 @@ require_once '../../config/connection.php';
 
 $receiveText = 'วัติ';
 
-$queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question");
+$queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question = :my_question LIMIT 1");
 $queryFindQustion->bindValue(':my_question', $receiveText);
-$queryFindQustion->execute();
+$resultFindQuestion = $queryFindQustion->execute();
 
-
+echo $resultFindQuestion.'<br>';
 
 /*$queryFindQustion->bindValue(':my_question', $receiveText);
 $queryFindQustion->execute();*/
@@ -20,6 +20,8 @@ if ($queryFindQustion->rowCount() > 0) {
 
     $sql = "SELECT * FROM answer WHERE id_question= $qID";
     $queryFindAnswer = $db_connection->query($sql);
+
+    echo '<br>'.$queryFindAnswer->rowCount();
     /*$queryFindAnswer->bindValue(':id_question', $qID);
     $queryFindAnswer->execute();*/
 
