@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set("Asia/Bangkok");
 require_once('./vendor/autoload.php');
+require_once('./config/connection.php');
 
 // Namespace
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
@@ -68,11 +69,38 @@ if (!is_null($events['events'])) {
                 case 'text':
 
                     $receiveText = $event['message']['text'];
+                    $user_line_id = $event['source']['userId'];
 
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
                     $textMessageBuilder = validNameCheckIn($receiveText);
+
+
+                    $queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question");
+                    $queryFindQustion->bindValue(':my_question', $receiveText);
+                    $queryFindQustion->execute();
+
+                    if($queryFindQustion->rowCount() > 0){
+
+                        $qID = $queryFindQustion->fetchColumn();
+
+                        $sql = "SELECT * FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
+                        $queryFindAnswer = $db_connection->prepare($sql);
+                        $queryFindAnswer->bindValue('id_question',$qID);
+                        $queryFindAnswer->execute();
+
+                        while($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC))
+                        {
+
+                            $answer_send = $row['name_answer'];
+                            $textMessageBuilder = new TextMessageBuilder($answer_send.'');
+
+                        }
+
+                    }
+
+
 
                     if ($receiveText == 'บริษัทอยู่ที่ไหน') {
 
@@ -115,14 +143,59 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys],$pictureMenu[$random_keys]);
 
-                    }else if (strpos($receiveText, 'สอนบอท') !== false) {
-                        $x_tra = str_replace("สอนบอท", "", $receiveText);
+                    }else if (strpos($receiveText, 'สอนสไมล์') !== false) {
+                        $x_tra = str_replace("สอนสไมล์", "", $receiveText);
                         $pieces = explode("|", $x_tra);
                         $_question = str_replace("[", "", $pieces[0]);
                         $_answer = str_replace("]", "", $pieces[1]);
 
-                        $textMessageBuilder = new TextMessageBuilder('ข้อความที่สอน '.$_question.'ข้อความที่ตอบ '.$_answer);
+
+                        $queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question");
+                        $queryFindQustion->bindValue(':my_question', $_question);
+                        $queryFindQustion->execute();
+
+                        $dateToday = date('Y-m-d');
+                        // เช็คว่ามีในฐานข้อมูลมั้ย
+                        if($queryFindQustion->rowCount() == 0){
+
+
+                            $sql = "INSERT INTO questions(name_question,created_by,created_at) VALUES (:name_question,:createby,:createat)";
+                            $saveQuestion = $db_connection->prepare($sql);
+                            $saveQuestion->bindValue(':name_question',$_question);
+                            $saveQuestion->bindValue(':createby',$user_line_id);
+                            $saveQuestion->bindValue(':createat',$dateToday);
+                            $saveQuestion->execute();
+
+
+                            $sql = "INSERT INTO answer(id_question,name_answer,created_by,created_at) VALUES (:id_question,:name_answer,:created_by,:todaydate)";
+                            $saveAnswer = $db_connection->prepare($sql);
+                            $saveAnswer->bindValue(':id_question',$db_connection->lastInsertId());
+                            $saveAnswer->bindValue(':name_answer',$_answer);
+                            $saveAnswer->bindValue(':created_by',$user_line_id);
+                            $saveAnswer->bindValue(':todaydate',$dateToday);
+                            $saveAnswer->execute();
+
+                            $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนสไมล์');
+
+                        }else{
+                            // เอา ID คำถาม
+                            $questionID = $queryFindQustion->fetchColumn();
+
+                            $sql = "INSERT INTO answer(id_question,name_answer,created_by,created_at) VALUES (:id_question,:name_answer,:created_by,:todaydate)";
+                            $saveAnswer = $db_connection->prepare($sql);
+                            $saveAnswer->bindValue(':id_question',$questionID);
+                            $saveAnswer->bindValue(':name_answer',$_answer);
+                            $saveAnswer->bindValue(':created_by',1);
+                            $saveAnswer->bindValue(':todaydate',$dateToday);
+                            $saveAnswer->execute();
+
+                            $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนสไมล์');
+
+                        }
+
+
                     }
+
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
