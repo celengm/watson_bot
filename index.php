@@ -76,7 +76,7 @@ if (!is_null($events['events'])) {
 
                     $textMessageBuilder = validNameCheckIn($receiveText);
 
-                    $queryFindQustion = $db_connection->prepare("SELECT name_question FROM questions WHERE name_question= :my_question");
+                    $queryFindQustion = $db_connection->prepare("SELECT id,name_question FROM questions WHERE name_question= :my_question");
                     $queryFindQustion->bindValue(':my_question', $receiveText);
                     $queryFindQustion->execute();
 
