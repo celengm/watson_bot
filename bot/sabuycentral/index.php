@@ -2,6 +2,7 @@
 date_default_timezone_set("Asia/Bangkok");
 require_once '../../config/connection.php';
 
+
 $receiveText = 'วัติ';
 
 $queryFindQustion = $db_connection->prepare("SELECT id FROM questions WHERE name_question = :my_question LIMIT 1");
@@ -31,7 +32,7 @@ if ($queryFindQustion->rowCount() > 0) {
 
     echo '<br><br>'.print_r($exArray);*/
 
-     while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
         $array_answer[] = $row['name_answer'];
 
     }

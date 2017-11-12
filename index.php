@@ -235,9 +235,37 @@ if (!is_null($events['events'])) {
                             ';
 
                         $textMessageBuilder = new TextMessageBuilder($respMessage);
-                    }else if($receiveText == '555' || $receiveText == 'โครตฮา' || $receiveText == 'ผ่าม' || $receiveText == 'จางในจาง'){
+                    }else if($receiveText == '555' || $receiveText == 'โครตฮา' || $receiveText == 'ผ่าม' || $receiveText == 'จางในจาง' || $receiveText == 'หลกจริง'){
 
-                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder(1,10);
+
+                        $randomSticker = [
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 10,
+                            ],
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 100,
+                            ],
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 110,
+                            ],
+                            [
+                                'pk_ID' => 2,
+                                'sk_ID' => 163,
+                            ]
+                        ];
+
+
+                        $random_keys = array_rand($randomSticker,1);
+
+                        echo $randomSticker[$random_keys]['sk_ID']. '<br>';
+
+                        $random_keys = array_rand($randomSticker, 1);
+
+                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
+
 
                     }
 
