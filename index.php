@@ -100,8 +100,8 @@ if (!is_null($events['events'])) {
 
                         while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
                             $array_answer[] = $row['name_answer'];
-
                         }
+
                         $random_keys = array_rand($array_answer, 1);
                         $textMessageBuilder = new TextMessageBuilder($array_answer[$random_keys]);
 
@@ -160,7 +160,7 @@ if (!is_null($events['events'])) {
                         $queryFindQustion->bindValue(':my_question', $_question);
                         $queryFindQustion->execute();
 
-                        $dateToday = date('Y-m-d');
+                        $dateToday = date('Y-m-d H:i:s');
                         // เช็คว่ามีในฐานข้อมูลมั้ย
                         if ($queryFindQustion->rowCount() == 0) {
 

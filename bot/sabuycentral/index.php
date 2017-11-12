@@ -30,16 +30,23 @@ if ($queryFindQustion->rowCount() > 0) {
     print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));
     echo '</pre>';*/
 
-    while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
+    $exArray[] = $queryFindAnswer->fetch(PDO::FETCH_ASSOC);
+
+    echo print_r($exArray);
+
+
+
+     /*while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
 
         $array_answer[] = $row['name_answer'];
 
-        /*$textMessageBuilder = new TextMessageBuilder($answer_send . '');*/
+        /*$textMessageBuilder = new TextMessageBuilder($answer_send . '');
 
     }
 
     $random_keys = array_rand($array_answer, 1);
     echo $array_answer[$random_keys];
+    */
 
 }
 
