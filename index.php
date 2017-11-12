@@ -144,9 +144,13 @@ if (!is_null($events['events'])) {
 
                         $random_keys = array_rand($pictureMenu, 1);
 
+                        $textMessageBuilder = new MessageBuilder\MultiMessageBuilder();
+                        $textMessageBuilder->add(new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]))
+                            ->add(new TextMessageBuilder($nameMenu[$random_keys].' กินมั้ยคะ'));
+
                         /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
-                        $textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]);
+                        /*$textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]);*/
 
                     } else if (strpos($receiveText, 'สอนสไมล์') !== false) {
                         $x_tra = str_replace("สอนสไมล์", "", $receiveText);
