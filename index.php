@@ -76,9 +76,8 @@ if (!is_null($events['events'])) {
 
                     $textMessageBuilder = validNameCheckIn($receiveText);
 
-
                     $queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question");
-                    $queryFindQustion->bindValue(':my_question', $receiveText);
+                    $queryFindQustion->bindValue(':my_question', trim($receiveText));
                     $queryFindQustion->execute();
 
                     if ($queryFindQustion->rowCount() > 0) {
@@ -113,7 +112,7 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new TextMessageBuilder('จัดไปลูกเพ่ ' . $warps[$random_keys]);
 
-                    } else if ($receiveText == 'เที่ยงนี้กินอะไรดี') {
+                    } else if ($receiveText == 'เที่ยงนี้กินอะไรดี' || $receiveText == 'วันนี้กินอะไรดี') {
 
                         $columns = array();
                         $nameMenu = ['ข้าวผัดหมูกรอบ', 'กระเพราไข่ดาว', 'คะน้าหมูกรอบ', 'หมูทอดกระเทียม, หมูทอด',
