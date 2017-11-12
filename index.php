@@ -235,6 +235,7 @@ if (!is_null($events['events'])) {
                             ';
 
                         $textMessageBuilder = new TextMessageBuilder($respMessage);
+
                     }else if($receiveText == '555' || $receiveText == 'โครตฮา' || $receiveText == 'ผ่าม' || $receiveText == 'จางในจาง' || $receiveText == 'หลกจริง'){
 
 
@@ -262,6 +263,20 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
 
+
+                    }else if($receiveText == 'ขอเพลงหน่อยจ่ะ'){
+
+                        $arr_youtube = [
+                            'https://www.youtube.com/watch?v=bONq00_XaA0',
+                            'https://www.youtube.com/watch?v=_Wl9Y05j8yU',
+                            'https://www.youtube.com/watch?v=9SfVVzN3oCU',
+                            'https://www.youtube.com/watch?v=0_-bZiDbK3w',
+                            'https://www.youtube.com/watch?v=5JGuHs_inbU',
+                            'https://www.youtube.com/watch?v=ohgoyu1Th68',
+                            ''
+                        ];
+                        $random_keys = array_rand($arr_youtube, 1);
+                        $textMessageBuilder = new TextMessageBuilder($arr_youtube[$random_keys]);
 
                     }
 
