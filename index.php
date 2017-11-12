@@ -258,10 +258,6 @@ if (!is_null($events['events'])) {
                         ];
 
 
-                        $random_keys = array_rand($randomSticker,1);
-
-                        echo $randomSticker[$random_keys]['sk_ID']. '<br>';
-
                         $random_keys = array_rand($randomSticker, 1);
 
                         $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
