@@ -76,7 +76,7 @@ if (!is_null($events['events'])) {
 
                     $textMessageBuilder = validNameCheckIn($receiveText);
 
-                    $queryFindQustion = $db_connection->prepare("SELECT id,name_question FROM questions WHERE name_question= :my_question");
+                    $queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question");
                     $queryFindQustion->bindValue(':my_question', $receiveText);
                     $queryFindQustion->execute();
 
@@ -84,7 +84,7 @@ if (!is_null($events['events'])) {
 
                         $qID = $queryFindQustion->fetchColumn();
 
-                        $sql = "SELECT * FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
+                        $sql = "SELECT name_answer FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
                         $queryFindAnswer = $db_connection->prepare($sql);
                         $queryFindAnswer->bindValue('id_question', $qID);
                         $queryFindAnswer->execute();
