@@ -82,19 +82,28 @@ if (!is_null($events['events'])) {
 
                     if ($queryFindQustion->rowCount() > 0) {
 
+
                         $qID = $queryFindQustion->fetchColumn();
 
-                        $sql = "SELECT name_answer FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
+                        $sql = "SELECT * FROM answer WHERE id_question= $qID";
+                        $queryFindAnswer = $db_connection->query($sql);
+
+                        /*$sql = "SELECT name_answer FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
                         $queryFindAnswer = $db_connection->prepare($sql);
                         $queryFindAnswer->bindValue('id_question', $qID);
-                        $queryFindAnswer->execute();
+                        $queryFindAnswer->execute();*/
+
+                        $array_answer = [];
+                        /*echo '<pre>';
+                        print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));
+                        echo '</pre>';*/
 
                         while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
-
-                            $answer_send = $row['name_answer'];
-                            $textMessageBuilder = new TextMessageBuilder($answer_send . '');
+                            $array_answer[] = $row['name_answer'];
 
                         }
+                        $random_keys = array_rand($array_answer, 1);
+                        $textMessageBuilder = new TextMessageBuilder($array_answer[$random_keys]);
 
                     }
 

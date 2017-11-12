@@ -4,29 +4,40 @@ require_once '../../config/connection.php';
 
 $receiveText = 'วัติ';
 
-$queryFindQustion = $db_connection->query("SELECT * FROM questions WHERE name_question= $receiveText");
+$queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question");
+$queryFindQustion->bindValue(':my_question', $receiveText);
+$queryFindQustion->execute();
 
-echo print_r($queryFindQustion);
+
 
 /*$queryFindQustion->bindValue(':my_question', $receiveText);
 $queryFindQustion->execute();*/
 
 if ($queryFindQustion->rowCount() > 0) {
 
-
     $qID = $queryFindQustion->fetchColumn();
 
-    $sql = "SELECT name_answer FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";
-    $queryFindAnswer = $db_connection->prepare($sql);
-    $queryFindAnswer->bindValue('id_question', $qID);
-    $queryFindAnswer->execute();
+
+    $sql = "SELECT * FROM answer WHERE id_question= $qID";
+    $queryFindAnswer = $db_connection->query($sql);
+    /*$queryFindAnswer->bindValue(':id_question', $qID);
+    $queryFindAnswer->execute();*/
+
+    $array_answer = [];
+    /*echo '<pre>';
+    print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));
+    echo '</pre>';*/
 
     while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
 
-        $answer_send = $row['name_answer'];
-        $textMessageBuilder = new TextMessageBuilder($answer_send . '');
+        $array_answer[] = $row['name_answer'];
+
+        /*$textMessageBuilder = new TextMessageBuilder($answer_send . '');*/
 
     }
+
+    $random_keys = array_rand($array_answer, 1);
+    echo $array_answer[$random_keys];
 
 }
 
