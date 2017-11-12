@@ -25,37 +25,37 @@ function validNameCheckIn($receiveText)
 {
 
     if ($receiveText == 'วัติเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณวัติ เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณวัติ เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ปืนเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปืน เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณปืน เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ตู่เช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณตู่ เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณตู่ เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ฟลุ๊คเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณฟลุ๊ค เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณฟลุ๊ค เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'นาถเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('นาถเด็กเกรียน2017-2560 เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('นาถเด็กเกรียน2017-2560 หยอกเล่นน้าจ้ะ ^^ เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'เบียร์เช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณเอกชัย เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดค่ะคุณเอกชัย (ล้อเล่นนะค้าา) เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ปิงเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณปิง เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณปิง เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'แคทเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแคทร้อยผัว เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดค่ะคุณแคทร้อยผัว (555 ขอโทษนะค้า หนูโดนโปรแกรมมาอย่างงี้) เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ผึ้งเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณผึ้งจอฟ้า เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณผึ้งจอฟ้า เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'มะปรางเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณมะปราง เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณมะปราง เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'หวานเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณนักข่าวหวาน เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณนักข่าวหวาน เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'กิ่งเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณ PM กิ่ง เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ PM กิ่ง เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ฟาริสเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณฟาริส เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณฟาริส เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'แต้งเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแต้ง เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณแต้ง เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'แยมเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแยม เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณแยม เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'แอ๋มเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีครับคุณแอ๋ม เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณแอ๋ม เช็คอินที่เวลา ' . date('H:i'));
     }
 
 }
