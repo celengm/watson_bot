@@ -4,11 +4,9 @@ require_once '../../config/connection.php';
 
 $receiveText = 'วัติ';
 
-$queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question = :my_question LIMIT 1");
+$queryFindQustion = $db_connection->prepare("SELECT id FROM questions WHERE name_question = :my_question LIMIT 1");
 $queryFindQustion->bindValue(':my_question', $receiveText);
 $resultFindQuestion = $queryFindQustion->execute();
-
-echo $resultFindQuestion.'<br>';
 
 /*$queryFindQustion->bindValue(':my_question', $receiveText);
 $queryFindQustion->execute();*/
@@ -21,7 +19,6 @@ if ($queryFindQustion->rowCount() > 0) {
     $sql = "SELECT name_answer FROM answer WHERE id_question= $qID";
     $queryFindAnswer = $db_connection->query($sql);
 
-    echo '<br>'.$queryFindAnswer->rowCount();
     /*$queryFindAnswer->bindValue(':id_question', $qID);
     $queryFindAnswer->execute();*/
 
@@ -30,23 +27,18 @@ if ($queryFindQustion->rowCount() > 0) {
     print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));
     echo '</pre>';*/
 
-    $exArray[] = $queryFindAnswer->fetch(PDO::FETCH_ASSOC);
+    /*$exArray[] = $queryFindAnswer->fetch(PDO::FETCH_ASSOC);
 
-    echo print_r($exArray);
+    echo '<br><br>'.print_r($exArray);*/
 
-
-
-     /*while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
-
+     while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
         $array_answer[] = $row['name_answer'];
-
-        /*$textMessageBuilder = new TextMessageBuilder($answer_send . '');
 
     }
 
     $random_keys = array_rand($array_answer, 1);
     echo $array_answer[$random_keys];
-    */
+
 
 }
 

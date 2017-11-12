@@ -76,7 +76,7 @@ if (!is_null($events['events'])) {
 
                     $textMessageBuilder = validNameCheckIn($receiveText);
 
-                    $queryFindQustion = $db_connection->prepare("SELECT * FROM questions WHERE name_question= :my_question LIMIT 1");
+                    $queryFindQustion = $db_connection->prepare("SELECT id FROM questions WHERE name_question= :my_question LIMIT 1");
                     $queryFindQustion->bindValue(':my_question', $receiveText);
                     $queryFindQustion->execute();
 
