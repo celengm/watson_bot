@@ -85,7 +85,7 @@ if (!is_null($events['events'])) {
 
                         $qID = $queryFindQustion->fetchColumn();
 
-                        $sql = "SELECT * FROM answer WHERE id_question= $qID";
+                        $sql = "SELECT name_answer FROM answer WHERE id_question= $qID";
                         $queryFindAnswer = $db_connection->query($sql);
 
                         /*$sql = "SELECT name_answer FROM answer WHERE id_question= :id_question OFFSET floor(random() * (select count(*) from answer)) LIMIT 1";

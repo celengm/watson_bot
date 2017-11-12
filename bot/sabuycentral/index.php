@@ -18,7 +18,7 @@ if ($queryFindQustion->rowCount() > 0) {
     $qID = $queryFindQustion->fetchColumn();
 
 
-    $sql = "SELECT * FROM answer WHERE id_question= $qID";
+    $sql = "SELECT name_answer FROM answer WHERE id_question= $qID";
     $queryFindAnswer = $db_connection->query($sql);
 
     echo '<br>'.$queryFindAnswer->rowCount();
