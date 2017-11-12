@@ -278,6 +278,32 @@ if (!is_null($events['events'])) {
                         $random_keys = array_rand($arr_youtube, 1);
                         $textMessageBuilder = new TextMessageBuilder($arr_youtube[$random_keys]);
 
+                    }else if($receiveText == 'สุดยอด' || $receiveText == 'สุดยอดไปเลย'){
+
+                        $randomSticker = [
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 14,
+                            ],
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 114,
+                            ],
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 125,
+                            ],
+                            [
+                                'pk_ID' => 1,
+                                'sk_ID' => 407,
+                            ]
+                        ];
+
+
+                        $random_keys = array_rand($randomSticker, 1);
+
+                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
+
                     }
 
 
