@@ -423,7 +423,7 @@ if (!is_null($events['events'])) {
                         }else if(strpos($receiveText, 'ตู่') !== false){
                             $number_phone = '0814761422';
                             $name = 'ตู่';
-                        }else if(strpos($receiveText, 'ฟลุ๊ก') !== false){
+                        }else if(strpos($receiveText, 'ฟลุ๊ค') !== false){
                             $number_phone = '0874194130';
                             $name = 'ฟลุ๊ก';
                         }else if(strpos($receiveText, 'แต้ง') !== false){
@@ -469,6 +469,9 @@ if (!is_null($events['events'])) {
                         }else if(strpos($receiveText, 'แยม') !== false){
                             $number_phone = '0828060546';
                             $name = 'แยม';
+                        }else{
+                            $number_phone = '';
+                            $name = 'ไม่มีชื่อในระบบจ้า';
                         }
 
                         $textMessageBuilder = new TextMessageBuilder('เบอร์คุณ '.$name.' คือ '.$number_phone);
