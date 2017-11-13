@@ -404,7 +404,8 @@ if (!is_null($events['events'])) {
                             'มะปราง',
                             'หวาน',
                             'กิ่ง',
-                            'ฟาริส'
+                            'ฟาริส',
+                            'ตู่'
                         ];
 
                         $random_keys = array_rand($nameUser, 1);
