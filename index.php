@@ -81,7 +81,7 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $nameCheckin = 'แอ๋ม';
     }
 
-    $sqlCheckin = "INSERT INTO users(name,checkin_at,id_line) VALUES (:myname,:mydate,:my_idline)";
+    $sqlCheckin = "INSERT INTO users(nick_name,checkin_at,id_line) VALUES (:myname,:mydate,:my_idline)";
     $saveAnswer = $db_connection->prepare($sqlCheckin);
     $saveAnswer->bindValue(':myname', $nameCheckin);
     $saveAnswer->bindValue(':my_idline', $user_line_id);
@@ -369,6 +369,17 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder = new MessageBuilder\MultiMessageBuilder();
                         $textMessageBuilder->add(new TextMessageBuilder('อะไรกันไม่รู้จริงหรอ'))
                             ->add(new TextMessageBuilder('2ไง'));
+
+                    }else if($receiveText == 'ข้อมูลเช็คอินวันนี้'){
+
+                        $sql = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours'";
+                        $query = $db_connection->query($sql);
+                        $checkInText = '';
+                        while($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)){
+                            $checkInText .= $row['nick_name'].$row['checkin_at'];
+                        }
+
+                        $textMessageBuilder = new TextMessageBuilder($checkInText);
 
                     }
 

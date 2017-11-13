@@ -13,7 +13,17 @@ if(strpos($exampleText, '=เท่าไหร่?') !== false){
 
 }*/
 
-function validNameCheckIn($receiveText,$user_line_id) {
+//$sql = "SELECT now() - interval '-7 hours' ";
+$sql = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours'";
+$queryFindAnswer = $db_connection->query($sql);
+
+/*echo print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));*/
+
+while($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)){
+    echo $row['nick_name'].'<br>';
+}
+
+/*function validNameCheckIn($receiveText,$user_line_id) {
 
     $dateCheckin = date('Y-m-d H:i:s');
     $nameCheckin = '';
@@ -97,7 +107,7 @@ $resultFindQuestion = $queryFindQustion->execute();
 /*$queryFindQustion->bindValue(':my_question', $receiveText);
 $queryFindQustion->execute();*/
 
-if ($queryFindQustion->rowCount() > 0) {
+/*if ($queryFindQustion->rowCount() > 0) {
 
     $qID = $queryFindQustion->fetchColumn();
 
@@ -108,14 +118,14 @@ if ($queryFindQustion->rowCount() > 0) {
     /*$queryFindAnswer->bindValue(':id_question', $qID);
     $queryFindAnswer->execute();*/
 
-    $array_answer = [];
+    /*$array_answer = [];*/
     /*echo '<pre>';
     print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));
     echo '</pre>';*/
 
     /*$exArray[] = $queryFindAnswer->fetch(PDO::FETCH_ASSOC);
 
-    echo '<br><br>'.print_r($exArray);*/
+    echo '<br><br>'.print_r($exArray);
 
     while ($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)) {
         $array_answer[] = $row['name_answer'];
@@ -151,4 +161,4 @@ if ($receiveText == 'ซื้อเสื้อหน่อย') {
     $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("แนะนำเสื้อจากร้าน Sabuy Central เลยจ้า", $carousel);
 
-}
+}*/
