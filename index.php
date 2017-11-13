@@ -81,7 +81,7 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $nameCheckin = 'แอ๋ม';
     }
 
-    $sqlCheckin = "INSERT INTO users(name,id_line,checkin_at) VALUES (:myname,:my_idline,:mydate)";
+    $sqlCheckin = "INSERT INTO users(name,checkin_at,id_line) VALUES (:myname,:mydate,:my_idline)";
     $saveAnswer = $db_connection->prepare($sqlCheckin);
     $saveAnswer->bindValue(':myname', $nameCheckin);
     $saveAnswer->bindValue(':my_idline', $user_line_id);
