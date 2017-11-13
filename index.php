@@ -108,7 +108,12 @@ if (!is_null($events['events'])) {
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
-                    $textMessageBuilder = validNameCheckIn($receiveText,$user_line_id);
+                    if(strpos($receiveText, 'เช็คอิน') !== false){
+
+                        $textMessageBuilder = validNameCheckIn($receiveText,$user_line_id);
+
+                    }
+
 
                     $queryFindQustion = $db_connection->prepare("SELECT id FROM questions WHERE name_question= :my_question LIMIT 1");
                     $queryFindQustion->bindValue(':my_question', $receiveText);
