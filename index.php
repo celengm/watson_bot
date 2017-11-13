@@ -376,7 +376,9 @@ if (!is_null($events['events'])) {
                         $query = $db_connection->query($sql);
                         $checkInText = '';
                         while($row = $query->fetch(PDO::FETCH_ASSOC)){
-                            $checkInText .= $row['nick_name'].$row['checkin_at'];
+                            $datetime = $row['checkin_at'];
+                            $time = strtotime($datetime);
+                            $checkInText .= $row['nick_name'].  date('H:i:s',$time);
                         }
 
                         $textMessageBuilder = new TextMessageBuilder($checkInText);
