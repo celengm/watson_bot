@@ -13,6 +13,78 @@ if(strpos($exampleText, '=เท่าไหร่?') !== false){
 
 }*/
 
+function validNameCheckIn($receiveText,$user_line_id) {
+
+    $dateCheckin = date('Y-m-d H:i:s');
+    $nameCheckin = '';
+
+    global $db_connection;
+
+
+    if ($receiveText == 'วัติเช็คอิน') {
+
+        global $nameCheckin;
+        $nameCheckin = 'วัติ';
+
+    } else if ($receiveText == 'ปืนเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ปืน';
+    } else if ($receiveText == 'ตู่เช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ตู่';
+    } else if ($receiveText == 'ฟลุ๊คเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ฟลุ๊ค';
+    } else if ($receiveText == 'นาถเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'นาถ';
+    } else if ($receiveText == 'เบียร์เช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'เบียร์';
+    } else if ($receiveText == 'ปิงเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ปิง';
+    } else if ($receiveText == 'แคทเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'แคท';
+    } else if ($receiveText == 'ผึ้งเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ผึ้ง';
+    } else if ($receiveText == 'มะปรางเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'มะปราง';
+    } else if ($receiveText == 'หวานเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'หวาน';
+    } else if ($receiveText == 'กิ่งเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'กิ่ง';
+    } else if ($receiveText == 'ฟาริสเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ฟาริส';
+    } else if ($receiveText == 'แต้งเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'แต้ง';
+    } else if ($receiveText == 'แยมเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'แยม';
+    } else if ($receiveText == 'แอ๋มเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'แอ๋ม';
+    }
+
+    $sqlCheckin = "INSERT INTO users(name,id_line,checkin_at) VALUES (:myname,:my_idline,:mydate)";
+    $saveAnswer = $db_connection->prepare($sqlCheckin);
+    $saveAnswer->bindValue(':myname', $nameCheckin);
+    $saveAnswer->bindValue(':my_idline', $user_line_id);
+    $saveAnswer->bindValue(':mydate', $dateCheckin);
+    $saveAnswer->execute();
+
+    return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));
+
+}
+
+validNameCheckIn('วัติเช็คอิน','123145646');
 
 
 
