@@ -372,7 +372,7 @@ if (!is_null($events['events'])) {
 
                     }else if($receiveText == 'ข้อมูลเช็คอินวันนี้'){
 
-                        $sql = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours'";
+                        $sql = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' ORDER BY checkin_at ASC";
                         $query = $db_connection->query($sql);
                         $checkInText = '';
                         while($row = $query->fetch(PDO::FETCH_ASSOC)){
