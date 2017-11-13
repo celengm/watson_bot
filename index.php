@@ -21,13 +21,12 @@ $events = json_decode($content, true);
 
 $textMessageBuilder = '';
 
-function validNameCheckIn($receiveText,$user_line_id) use $db_connection
-{
+function validNameCheckIn($receiveText,$user_line_id) {
 
     $dateCheckin = date('Y-m-d H:i:s');
 
     if ($receiveText == 'วัติเช็คอิน') {
-
+        global $db_connection;
         $sql = "INSERT INTO users(name,id_line,checkin_at) VALUES (wat,$user_line_id,$dateCheckin)";
         $saveAnswer = $db_connection->query($sql);
 
