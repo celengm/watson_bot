@@ -14,8 +14,8 @@ if(strpos($exampleText, '=เท่าไหร่?') !== false){
 }*/
 
 //$sql = "SELECT now() - interval '-7 hours' ";
-$sql = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours'";
-$queryFindAnswer = $db_connection->query($sql);
+$sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' AND checkin_at >= now() - interval '7 hours' ORDER BY checkin_at ASC";
+$queryFindAnswer = $db_connection->query($sqlGetDate);
 
 /*echo print_r($queryFindAnswer->fetch(PDO::FETCH_ASSOC));*/
 

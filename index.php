@@ -373,7 +373,7 @@ if (!is_null($events['events'])) {
 
                     }else if($receiveText == 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย'){
 
-                        $sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' ORDER BY checkin_at ASC";
+                        $sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' AND checkin_at >= now() - interval '7 hours' ORDER BY checkin_at ASC";
                         $querytime = $db_connection->query($sqlGetDate);
                         $checkInText = '';
                         while($row = $querytime->fetch(PDO::FETCH_ASSOC)){
@@ -385,6 +385,30 @@ if (!is_null($events['events'])) {
                         $checkInText .= "\n สไมล์ยินดีรับใช้จ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($checkInText);
+
+                    }else if($receiveText == 'สไมล์ขอสุ่มชื่อทีมหน่อย'){
+
+                        $nameUser = [
+                            'วัติ',
+                            'ปิง',
+                            'แคท',
+                            'ผึ้ง',
+                            'ต้น',
+                            'แยม',
+                            'ปืน',
+                            'ฟลุ๊ค',
+                            'นาถ',
+                            'แต้ง',
+                            'แอ๋ม',
+                            'เบียร์',
+                            'มะปราง',
+                            'หวาน',
+                            'กิ่ง',
+                            'ฟาริส'
+                        ];
+
+                        $random_keys = array_rand($nameUser, 1);
+                        $textMessageBuilder = new TextMessageBuilder('ชื่อที่ออกได้แก่ แท่นแท๊นแต้น คุณ '.$nameUser[$random_keys].' จ้า');
 
                     }
 
