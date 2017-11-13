@@ -140,7 +140,15 @@ if (!is_null($events['events'])) {
                         }
 
                         $random_keys = array_rand($array_answer, 1);
-                        $textMessageBuilder = new TextMessageBuilder($array_answer[$random_keys]);
+
+                        if(getimagesize($array_answer[$random_keys])){
+                            $textMessageBuilder = new ImageMessageBuilder($array_answer[$random_keys],$array_answer[$random_keys]);
+
+                        }else{
+                            $textMessageBuilder = new TextMessageBuilder($array_answer[$random_keys]);
+                        }
+
+
 
                     }
 
