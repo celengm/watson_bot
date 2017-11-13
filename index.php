@@ -379,8 +379,10 @@ if (!is_null($events['events'])) {
                         while($row = $querytime->fetch(PDO::FETCH_ASSOC)){
                             $datetimeToday = $row['checkin_at'];
                             $timeDate = strtotime($datetimeToday);
-                            $checkInText .= $row['nick_name'].  date('H:i:s',$timeDate)."\n";
+                            $checkInText .= $row['nick_name']. 'เวลา = ' .date('H:i:s',$timeDate)."\n";
                         }
+
+                        $checkInText .= "\n สไมล์ยินดีรับใช้จ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($checkInText);
 
