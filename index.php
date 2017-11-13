@@ -386,7 +386,7 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new TextMessageBuilder($checkInText);
 
-                    }else if($receiveText == 'สไมล์ขอสุ่มชื่อทีมหน่อย'){
+                    }else if($receiveText == 'สไมล์ขอสุ่มชื่อสมาชิกหน่อย'){
 
                         $nameUser = [
                             'วัติ',
