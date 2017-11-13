@@ -411,6 +411,68 @@ if (!is_null($events['events'])) {
                         $random_keys = array_rand($nameUser, 1);
                         $textMessageBuilder = new TextMessageBuilder('ชื่อที่ออกได้แก่ แท่นแท๊นแต้น คุณ '.$nameUser[$random_keys].' จ้า');
 
+                    }else if(strpos($receiveText, 'ขอเบอร์') !== false){
+
+                        $number_phone = 0;
+                        $name = '';
+                        $textResponse = '';
+
+                        if(strpos($receiveText, 'กิ่ง') !== false){
+                            $number_phone = '0873833272';
+                            $name = 'กิ่ง';
+                        }else if(strpos($receiveText, 'ตู่') !== false){
+                            $number_phone = '0814761422';
+                            $name = 'ตู่';
+                        }else if(strpos($receiveText, 'ฟลุ๊ก') !== false){
+                            $number_phone = '0874194130';
+                            $name = 'ฟลุ๊ก';
+                        }else if(strpos($receiveText, 'แต้ง') !== false){
+                            $number_phone = '0824853836';
+                            $name = 'แต้ง';
+                        }else if(strpos($receiveText, 'ต้น') !== false){
+                            $number_phone = '0988322637';
+                            $name = 'ต้น';
+                        }else if(strpos($receiveText, 'ปิง') !== false){
+                            $number_phone = '0831958515';
+                            $name = 'ปิง';
+
+                        }else if(strpos($receiveText, 'วัติ') !== false){
+                            $number_phone = '0874785366';
+                            $name = 'วัติ';
+                        }else if(strpos($receiveText, 'มะปราง') !== false){
+                            $number_phone = '0950296644';
+                            $name = 'มะปราง';
+                        }else if(strpos($receiveText, 'เบียร์') !== false){
+                            $number_phone = '0824275986';
+                            $name = 'เบียร์';
+                        }else if(strpos($receiveText, 'ผึ้ง') !== false){
+                            $number_phone = '0980599360';
+                            $name = 'ผึ้ง';
+                        }else if(strpos($receiveText, 'นาถ') !== false){
+                            $number_phone = '089 653 8918';
+                            $name = 'นาถ';
+                        }else if(strpos($receiveText, 'แคท') !== false){
+                            $number_phone = '094 496 0656';
+                            $name = 'แคท';
+                        }else if(strpos($receiveText, 'หวาน') !== false){
+                            $number_phone = '089 596 1232';
+                            $name = 'หวาน';
+                        }else if(strpos($receiveText, 'ปืน') !== false){
+                            $number_phone = '095 041 3765';
+                            $name = 'ปืน';
+                        }else if(strpos($receiveText, 'แอ๋ม') !== false){
+                            $number_phone = '0980693839';
+                            $name = 'แอ๋ม';
+                        }else if(strpos($receiveText, 'ฟาริส') !== false){
+                            $number_phone = '0945919964';
+                            $name = 'ฟาริส';
+                        }else if(strpos($receiveText, 'แยม') !== false){
+                            $number_phone = '0828060546';
+                            $name = 'แยม';
+                        }
+
+                        $textMessageBuilder = new TextMessageBuilder('เบอร์คุณ '.$name.' คือ'.$number_phone);
+
                     }
 
 
