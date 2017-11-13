@@ -24,46 +24,73 @@ $textMessageBuilder = '';
 function validNameCheckIn($receiveText,$user_line_id) {
 
     $dateCheckin = date('Y-m-d H:i:s');
+    $nameCheckin = '';
+
+
+    global $db_connection;
+
 
     if ($receiveText == 'วัติเช็คอิน') {
-        global $db_connection;
-        $sql = "INSERT INTO users(name,id_line,checkin_at) VALUES (wat,$user_line_id,$dateCheckin)";
-        $saveAnswer = $db_connection->query($sql);
 
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณวัติ เช็คอินที่เวลา ' . date('H:i'));
-
+        global $nameCheckin;
+        $nameCheckin = 'วัติ';
 
     } else if ($receiveText == 'ปืนเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณปืน เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'ปืน';
     } else if ($receiveText == 'ตู่เช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณตู่ เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'ตู่';
     } else if ($receiveText == 'ฟลุ๊คเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณฟลุ๊ค เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'ฟลุ๊ค';
     } else if ($receiveText == 'นาถเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('นาถเด็กเกรียน2017-2560 หยอกเล่นน้าจ้ะ ^^ เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'นาถ';
     } else if ($receiveText == 'เบียร์เช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดค่ะคุณเอกชัย (ล้อเล่นนะค้าา) เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'เบียร์';
     } else if ($receiveText == 'ปิงเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณปิง เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'ปิง';
     } else if ($receiveText == 'แคทเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดค่ะคุณแคทร้อยผัว (555 ขอโทษนะค้า หนูโดนโปรแกรมมาอย่างงี้) เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'แคท';
     } else if ($receiveText == 'ผึ้งเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณผึ้งจอฟ้า เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'ผึ้ง';
     } else if ($receiveText == 'มะปรางเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณมะปราง เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'มะปราง';
     } else if ($receiveText == 'หวานเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณนักข่าวหวาน เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'หวาน';
     } else if ($receiveText == 'กิ่งเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ PM กิ่ง เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'กิ่ง';
     } else if ($receiveText == 'ฟาริสเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณฟาริส เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'ฟาริส';
     } else if ($receiveText == 'แต้งเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณแต้ง เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'แต้ง';
     } else if ($receiveText == 'แยมเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณแยม เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'แยม';
     } else if ($receiveText == 'แอ๋มเช็คอิน') {
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณแอ๋ม เช็คอินที่เวลา ' . date('H:i'));
+        global $nameCheckin;
+        $nameCheckin = 'แอ๋ม';
     }
+
+    $sqlCheckin = "INSERT INTO users(name,id_line,checkin_at) VALUES (:myname,:my_idline,:mydate)";
+    $saveAnswer = $db_connection->prepare($sqlCheckin);
+    $saveAnswer->bindValue(':myname', $nameCheckin);
+    $saveAnswer->bindValue(':my_idline', $user_line_id);
+    $saveAnswer->bindValue(':mydate', $dateCheckin);
+    $saveAnswer->execute();
+
+    return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));
+
 
 }
 

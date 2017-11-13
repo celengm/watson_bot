@@ -14,6 +14,8 @@ if(strpos($exampleText, '=เท่าไหร่?') !== false){
 }*/
 
 
+
+
 $receiveText = 'วัติ';
 
 $queryFindQustion = $db_connection->prepare("SELECT id FROM questions WHERE name_question = :my_question LIMIT 1");
