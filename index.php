@@ -45,7 +45,7 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $nameCheckin = 'ฟลุ๊ค';
     } else if ($receiveText == 'นาถเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'นาถ';
+        $nameCheckin = 'นาถเด็กเกรียน';
     } else if ($receiveText == 'เบียร์เช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'เบียร์';
@@ -63,10 +63,10 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $nameCheckin = 'มะปราง';
     } else if ($receiveText == 'หวานเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'หวาน';
+        $nameCheckin = 'นักข่าวหวาน';
     } else if ($receiveText == 'กิ่งเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'กิ่ง';
+        $nameCheckin = 'PMกิ่ง';
     } else if ($receiveText == 'ฟาริสเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'ฟาริส';
