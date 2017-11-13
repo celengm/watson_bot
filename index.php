@@ -23,7 +23,7 @@ $textMessageBuilder = '';
 
 function validNameCheckIn($receiveText,$user_line_id) {
 
-    $dateCheckin = date('Y-m-d H:i:s');
+    /*$dateCheckin = date('Y-m-d H:i:s');
     $nameCheckin = '';
 
 
@@ -89,10 +89,10 @@ function validNameCheckIn($receiveText,$user_line_id) {
     $saveAnswer->bindValue(':mydate', $dateCheckin);
     $saveAnswer->execute();
 
-    return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));
-
+    return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));*/
 
 }
+
 
 if (!is_null($events['events'])) {
 
