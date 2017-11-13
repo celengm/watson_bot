@@ -375,7 +375,7 @@ if (!is_null($events['events'])) {
                         $sql = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours'";
                         $query = $db_connection->query($sql);
                         $checkInText = '';
-                        while($row = $queryFindAnswer->fetch(PDO::FETCH_ASSOC)){
+                        while($row = $query->fetch(PDO::FETCH_ASSOC)){
                             $checkInText .= $row['nick_name'].$row['checkin_at'];
                         }
 
