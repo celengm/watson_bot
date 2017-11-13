@@ -471,7 +471,7 @@ if (!is_null($events['events'])) {
                             $name = 'แยม';
                         }
 
-                        $textMessageBuilder = new TextMessageBuilder('เบอร์คุณ '.$name.' คือ'.$number_phone);
+                        $textMessageBuilder = new TextMessageBuilder('เบอร์คุณ '.$name.' คือ '.$number_phone);
 
                     }
 
