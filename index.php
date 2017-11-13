@@ -21,11 +21,18 @@ $events = json_decode($content, true);
 
 $textMessageBuilder = '';
 
-function validNameCheckIn($receiveText)
+function validNameCheckIn($receiveText,$user_line_id)
 {
+
+    $dateCheckin = date('Y-m-d H:i:s');
 
     if ($receiveText == 'วัติเช็คอิน') {
         return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณวัติ เช็คอินที่เวลา ' . date('H:i'));
+
+        $sql = "INSERT INTO users(name,id_line,checkin_at) VALUES (wat,$user_line_id,$dateCheckin)";
+        $saveAnswer = $db_connection->query($sql);
+
+
     } else if ($receiveText == 'ปืนเช็คอิน') {
         return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณปืน เช็คอินที่เวลา ' . date('H:i'));
     } else if ($receiveText == 'ตู่เช็คอิน') {
@@ -74,7 +81,7 @@ if (!is_null($events['events'])) {
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
-                    $textMessageBuilder = validNameCheckIn($receiveText);
+                    $textMessageBuilder = validNameCheckIn($receiveText,$user_line_id);
 
                     $queryFindQustion = $db_connection->prepare("SELECT id FROM questions WHERE name_question= :my_question LIMIT 1");
                     $queryFindQustion->bindValue(':my_question', $receiveText);
