@@ -552,7 +552,7 @@ if (!is_null($events['events'])) {
 
                     /*$latigude = $event['message']['latitude'];
                     $longtigude = $event['message']['longitude'];*/
-                    $address = $event['message']['address'];
+                    $address = '12131';
 
                     /*$url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.8751929,98.3635038&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
 
