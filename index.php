@@ -553,7 +553,7 @@ if (!is_null($events['events'])) {
                     $latigude = $event['message']['latitude'];
                     $longtigude = $event['message']['longitude'];
 
-                    $url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.8751929,98.3635038&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
+                    /*$url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.8751929,98.3635038&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
 
                     $ch = curl_init();
                     // Disable SSL verification
@@ -571,12 +571,12 @@ if (!is_null($events['events'])) {
 
                     /*echo $arrayWeather['routes'][0]['legs'][0]['distance']['text'];*/
 
-                    $textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
+                    /*$textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
                     $textMessageBuilder .= "ตอนนี้คุณอยู่ที่".$arrayWeather['routes'][0]['legs'][0]['start_address'] ."\n";
                     $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
-                    $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
+                    $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";*/
 
-                    $textMessageBuilder = new TextMessageBuilder($textMessageBuilder);
+                    $textMessageBuilder = new TextMessageBuilder($latigude.' '.$longtigude);
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
