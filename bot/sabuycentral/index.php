@@ -19,7 +19,13 @@ curl_close($ch);
 
 $arrayWeather = json_decode($result, true);
 
-echo $arrayWeather['routes'][0]['legs'][0]['distance']['text'];
+
+$textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
+$textMessageBuilder .= "ตอนนี้คุณอยู่ที่".$arrayWeather['routes'][0]['legs'][0]['start_address'] ."\n";
+$textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
+$textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
+
+echo $textMessageBuilder;
 /*$exampleText = '1+1=เท่าไหร่?';
 
 if(strpos($exampleText, '=เท่าไหร่?') !== false){
