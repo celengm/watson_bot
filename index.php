@@ -111,7 +111,7 @@ if (!is_null($events['events'])) {
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
-                    if( (strpos($receiveText, 'เช็คอิน') !== false) && $receiveText != 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' ){
+                    if( (strpos($receiveText, 'เช็คอิน') !== false) && $receiveText != 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' && $receiveText != 'ข้อมูลเช็คอินวันนี้'  ){
 
                         $textMessageBuilder = validNameCheckIn($receiveText,$user_line_id);
 
@@ -375,7 +375,7 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder->add(new TextMessageBuilder('อะไรกันไม่รู้จริงหรอ'))
                             ->add(new TextMessageBuilder('2ไง'));
 
-                    }else if($receiveText == 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย'){
+                    }else if($receiveText == 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' || $receiveText == 'ข้อมูลเช็คอินวันนี้' ){
 
                         $sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' AND checkin_at >= now() - interval '7 hours' ORDER BY checkin_at ASC";
                         $querytime = $db_connection->query($sqlGetDate);
@@ -383,7 +383,7 @@ if (!is_null($events['events'])) {
                         while($row = $querytime->fetch(PDO::FETCH_ASSOC)){
                             $datetimeToday = $row['checkin_at'];
                             $timeDate = strtotime($datetimeToday);
-                            $checkInText .= $row['nick_name']. 'เวลา = ' .date('H:i:s',$timeDate)."\n";
+                            $checkInText .= $row['nick_name']. ' เวลา = ' .date('H:i:s',$timeDate)."\n";
                         }
 
                         $checkInText .= "\n สไมล์ยินดีรับใช้จ้า";
