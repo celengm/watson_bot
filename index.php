@@ -576,6 +576,7 @@ if (!is_null($events['events'])) {
                     $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
                     $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
 
+                    $textMessageBuilder = new TextMessageBuilder($textMessageBuilder);
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
