@@ -381,7 +381,8 @@ if (!is_null($events['events'])) {
 
                         $sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' AND checkin_at >= now() - interval '7 hours' ORDER BY checkin_at ASC";
                         $querytime = $db_connection->query($sqlGetDate);
-                        $checkInText = '';
+                        $checkInText = 'ข้อมูลเช็คอินวันที่ '.date('d/m/Y').' จ่ะ'."\n";
+
                         while($row = $querytime->fetch(PDO::FETCH_ASSOC)){
                             $datetimeToday = $row['checkin_at'];
                             $timeDate = strtotime($datetimeToday);
