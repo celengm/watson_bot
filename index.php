@@ -573,7 +573,7 @@ if (!is_null($events['events'])) {
                     $textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
                     $textMessageBuilder .= "ตอนนี้คุณอยู่ที่".$arrayWeather['routes'][0]['legs'][0]['start_address'] ."\n";
                     $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
-                    $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
+                    $textMessageBuilder .= "ใช้เวลาเดินทางด้วยรถโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
 
                     $textMessageBuilder = new TextMessageBuilder($textMessageBuilder);
 
