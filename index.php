@@ -21,13 +21,13 @@ $events = json_decode($content, true);
 
 $textMessageBuilder = '';
 
-function validNameCheckIn($receiveText,$user_line_id) {
+function validNameCheckIn($receiveText, $user_line_id)
+{
 
     $dateCheckin = date('Y-m-d H:i:s');
     $nameCheckin = '';
 
     global $db_connection;
-
 
 
     if ($receiveText == 'วัติเช็คอิน') {
@@ -83,11 +83,11 @@ function validNameCheckIn($receiveText,$user_line_id) {
     } else if ($receiveText == 'แอ๋มเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'แอ๋ม';
-    }else{
+    } else {
         return $textMessageBuilder = new TextMessageBuilder('โปรดระบุชื่อในการเช็คอินด้วยจ้าที่รัก');
     }
 
-    if(!empty($nameCheckin)){
+    if (!empty($nameCheckin)) {
         $sqlCheckin = "INSERT INTO users(nick_name,checkin_at,id_line) VALUES (:myname,:mydate,:my_idline)";
         $saveAnswer = $db_connection->prepare($sqlCheckin);
         $saveAnswer->bindValue(':myname', $nameCheckin);
@@ -95,7 +95,7 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $saveAnswer->bindValue(':mydate', $dateCheckin);
         $saveAnswer->execute();
 
-        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ' . $nameCheckin . ' เช็คอินที่เวลา ' . date('H:i'));
     }
 
 
@@ -116,9 +116,9 @@ if (!is_null($events['events'])) {
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
-                    if( (strpos($receiveText, 'เช็คอิน') !== false) && $receiveText != 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' && $receiveText != 'ข้อมูลเช็คอินวันนี้'  ){
+                    if ((strpos($receiveText, 'เช็คอิน') !== false) && $receiveText != 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' && $receiveText != 'ข้อมูลเช็คอินวันนี้') {
 
-                        $textMessageBuilder = validNameCheckIn($receiveText,$user_line_id);
+                        $textMessageBuilder = validNameCheckIn($receiveText, $user_line_id);
 
                     }
 
@@ -151,13 +151,12 @@ if (!is_null($events['events'])) {
 
                         $random_keys = array_rand($array_answer, 1);
 
-                        if(getimagesize($array_answer[$random_keys])){
-                            $textMessageBuilder = new ImageMessageBuilder($array_answer[$random_keys],$array_answer[$random_keys]);
+                        if (getimagesize($array_answer[$random_keys])) {
+                            $textMessageBuilder = new ImageMessageBuilder($array_answer[$random_keys], $array_answer[$random_keys]);
 
-                        }else{
+                        } else {
                             $textMessageBuilder = new TextMessageBuilder($array_answer[$random_keys]);
                         }
-
 
 
                     }
@@ -179,7 +178,7 @@ if (!is_null($events['events'])) {
 
                         $columns = array();
                         $nameMenu = ['ข้าวผัดหมูกรอบ', 'กระเพราไข่ดาว', 'คะน้าหมูกรอบ', 'หมูทอดกระเทียม, หมูทอด',
-                            'ผัดซีอิ้ว', 'ผัดผักรวม', 'ผัดพริกหยวก', 'ผัดพริกเผา', 'KFC', 'Pizza','ก๋วยเตี๋ยวหมูต้มยำ','ก๋วยเตี๋ยวลูกชิ้นหมูต้มยำ','ข้าวมันไก่'
+                            'ผัดซีอิ้ว', 'ผัดผักรวม', 'ผัดพริกหยวก', 'ผัดพริกเผา', 'KFC', 'Pizza', 'ก๋วยเตี๋ยวหมูต้มยำ', 'ก๋วยเตี๋ยวลูกชิ้นหมูต้มยำ', 'ข้าวมันไก่'
                         ];
                         $pictureMenu = [
                             'https://image.ibb.co/b4jy7b/3_CL3_MZ976_FA2_AB862_F8_AA9mx.jpg',
@@ -205,11 +204,11 @@ if (!is_null($events['events'])) {
                         ];
 
                         $random_keys = array_rand($pictureMenu, 1);
-                        $random_answerText = array_rand($answerText,1);
+                        $random_answerText = array_rand($answerText, 1);
 
                         $textMessageBuilder = new MessageBuilder\MultiMessageBuilder();
                         $textMessageBuilder->add(new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]))
-                            ->add(new TextMessageBuilder($nameMenu[$random_keys].' '.$answerText[$random_answerText]));
+                            ->add(new TextMessageBuilder($nameMenu[$random_keys] . ' ' . $answerText[$random_answerText]));
 
                         /*$textMessageBuilder = new TextMessageBuilder($nameMenu[$random_keys]);*/
 
@@ -303,7 +302,7 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new TextMessageBuilder($respMessage);
 
-                    }else if($receiveText == '555' || $receiveText == 'โครตฮา' || $receiveText == 'ผ่าม' || $receiveText == 'จางในจาง' || $receiveText == 'หลกจริง'){
+                    } else if ($receiveText == '555' || $receiveText == 'โครตฮา' || $receiveText == 'ผ่าม' || $receiveText == 'จางในจาง' || $receiveText == 'หลกจริง') {
 
 
                         $randomSticker = [
@@ -328,10 +327,10 @@ if (!is_null($events['events'])) {
 
                         $random_keys = array_rand($randomSticker, 1);
 
-                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
+                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'], $randomSticker[$random_keys]['sk_ID']);
 
 
-                    }else if($receiveText == 'ขอเพลงหน่อยจ่ะ'){
+                    } else if ($receiveText == 'ขอเพลงหน่อยจ่ะ') {
 
                         $arr_youtube = [
                             'https://www.youtube.com/watch?v=bONq00_XaA0',
@@ -345,7 +344,7 @@ if (!is_null($events['events'])) {
                         $random_keys = array_rand($arr_youtube, 1);
                         $textMessageBuilder = new TextMessageBuilder($arr_youtube[$random_keys]);
 
-                    }else if($receiveText == 'สุดยอด' || $receiveText == 'สุดยอดไปเลย'){
+                    } else if ($receiveText == 'สุดยอด' || $receiveText == 'สุดยอดไปเลย') {
 
                         $randomSticker = [
                             [
@@ -369,9 +368,9 @@ if (!is_null($events['events'])) {
 
                         $random_keys = array_rand($randomSticker, 1);
 
-                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'],$randomSticker[$random_keys]['sk_ID']);
+                        $textMessageBuilder = new MessageBuilder\StickerMessageBuilder($randomSticker[$random_keys]['pk_ID'], $randomSticker[$random_keys]['sk_ID']);
 
-                    }else if(strpos($receiveText, '1+1=เท่าไหร่?') !== false){
+                    } else if (strpos($receiveText, '1+1=เท่าไหร่?') !== false) {
 
                         /*$ex_plodeArray = explode('=',$receiveText);*/
 
@@ -380,23 +379,23 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder->add(new TextMessageBuilder('อะไรกันไม่รู้จริงหรอ'))
                             ->add(new TextMessageBuilder('2ไง'));
 
-                    }else if($receiveText == 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' || $receiveText == 'ข้อมูลเช็คอินวันนี้' ){
+                    } else if ($receiveText == 'สไมล์ขอข้อมูลเช็คอินวันนี้หน่อย' || $receiveText == 'ข้อมูลเช็คอินวันนี้') {
 
                         $sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' AND checkin_at >= now() - interval '7 hours' ORDER BY checkin_at ASC";
                         $querytime = $db_connection->query($sqlGetDate);
-                        $checkInText = 'ข้อมูลเช็คอินวันที่ '.date('d/m/Y').' จ่ะ'."\n";
+                        $checkInText = 'ข้อมูลเช็คอินวันที่ ' . date('d/m/Y') . ' จ่ะ' . "\n";
 
-                        while($row = $querytime->fetch(PDO::FETCH_ASSOC)){
+                        while ($row = $querytime->fetch(PDO::FETCH_ASSOC)) {
                             $datetimeToday = $row['checkin_at'];
                             $timeDate = strtotime($datetimeToday);
-                            $checkInText .= $row['nick_name']. ' เวลา = ' .date('H:i:s',$timeDate)."\n";
+                            $checkInText .= $row['nick_name'] . ' เวลา = ' . date('H:i:s', $timeDate) . "\n";
                         }
 
                         $checkInText .= "\n สไมล์ยินดีรับใช้จ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($checkInText);
 
-                    }else if($receiveText == 'สไมล์ขอสุ่มชื่อสมาชิกหน่อย'){
+                    } else if ($receiveText == 'สไมล์ขอสุ่มชื่อสมาชิกหน่อย') {
 
                         $nameUser = [
                             'วัติ',
@@ -419,79 +418,125 @@ if (!is_null($events['events'])) {
                         ];
 
                         $random_keys = array_rand($nameUser, 1);
-                        $textMessageBuilder = new TextMessageBuilder('ชื่อที่ออกได้แก่ แท่นแท๊นแต้น คุณ '.$nameUser[$random_keys].' จ้า');
+                        $textMessageBuilder = new TextMessageBuilder('ชื่อที่ออกได้แก่ แท่นแท๊นแต้น คุณ ' . $nameUser[$random_keys] . ' จ้า');
 
-                    }else if(strpos($receiveText, 'ขอเบอร์') !== false){
+                    } else if (strpos($receiveText, 'ขอเบอร์') !== false) {
 
                         $number_phone = 0;
                         $name = '';
                         $textResponse = '';
 
-                        if(strpos($receiveText, 'กิ่ง') !== false){
+                        if (strpos($receiveText, 'กิ่ง') !== false) {
                             $number_phone = '0873833272';
                             $name = 'กิ่ง';
-                        }else if(strpos($receiveText, 'ตู่') !== false){
+                        } else if (strpos($receiveText, 'ตู่') !== false) {
                             $number_phone = '0814761422';
                             $name = 'ตู่';
-                        }else if(strpos($receiveText, 'ฟลุ๊ค') !== false){
+                        } else if (strpos($receiveText, 'ฟลุ๊ค') !== false) {
                             $number_phone = '0874194130';
                             $name = 'ฟลุ๊ก';
-                        }else if(strpos($receiveText, 'แต้ง') !== false){
+                        } else if (strpos($receiveText, 'แต้ง') !== false) {
                             $number_phone = '0824853836';
                             $name = 'แต้ง';
-                        }else if(strpos($receiveText, 'ต้น') !== false){
+                        } else if (strpos($receiveText, 'ต้น') !== false) {
                             $number_phone = '0988322637';
                             $name = 'ต้น';
-                        }else if(strpos($receiveText, 'ปิง') !== false){
+                        } else if (strpos($receiveText, 'ปิง') !== false) {
                             $number_phone = '0831958515';
                             $name = 'ปิง';
 
-                        }else if(strpos($receiveText, 'วัติ') !== false){
+                        } else if (strpos($receiveText, 'วัติ') !== false) {
                             $number_phone = '0874785366';
                             $name = 'วัติ';
-                        }else if(strpos($receiveText, 'มะปราง') !== false){
+                        } else if (strpos($receiveText, 'มะปราง') !== false) {
                             $number_phone = '0950296644';
                             $name = 'มะปราง';
-                        }else if(strpos($receiveText, 'เบียร์') !== false){
+                        } else if (strpos($receiveText, 'เบียร์') !== false) {
                             $number_phone = '0824275986';
                             $name = 'เบียร์';
-                        }else if(strpos($receiveText, 'ผึ้ง') !== false){
+                        } else if (strpos($receiveText, 'ผึ้ง') !== false) {
                             $number_phone = '0980599360';
                             $name = 'ผึ้ง';
-                        }else if(strpos($receiveText, 'นาถ') !== false){
+                        } else if (strpos($receiveText, 'นาถ') !== false) {
                             $number_phone = '089 653 8918';
                             $name = 'นาถ';
-                        }else if(strpos($receiveText, 'แคท') !== false){
+                        } else if (strpos($receiveText, 'แคท') !== false) {
                             $number_phone = '094 496 0656';
                             $name = 'แคท';
-                        }else if(strpos($receiveText, 'หวาน') !== false){
+                        } else if (strpos($receiveText, 'หวาน') !== false) {
                             $number_phone = '089 596 1232';
                             $name = 'หวาน';
-                        }else if(strpos($receiveText, 'ปืน') !== false){
+                        } else if (strpos($receiveText, 'ปืน') !== false) {
                             $number_phone = '095 041 3765';
                             $name = 'ปืน';
-                        }else if(strpos($receiveText, 'แอ๋ม') !== false){
+                        } else if (strpos($receiveText, 'แอ๋ม') !== false) {
                             $number_phone = '0980693839';
                             $name = 'แอ๋ม';
-                        }else if(strpos($receiveText, 'ฟาริส') !== false){
+                        } else if (strpos($receiveText, 'ฟาริส') !== false) {
                             $number_phone = '0945919964';
                             $name = 'ฟาริส';
-                        }else if(strpos($receiveText, 'แยม') !== false){
+                        } else if (strpos($receiveText, 'แยม') !== false) {
                             $number_phone = '0828060546';
                             $name = 'แยม';
-                        }else{
+                        } else {
                             $number_phone = '';
                             $name = 'ไม่มีชื่อในระบบจ้า';
                         }
 
-                        $textMessageBuilder = new TextMessageBuilder('เบอร์คุณ '.$name.' คือ '.$number_phone);
+                        $textMessageBuilder = new TextMessageBuilder('เบอร์คุณ ' . $name . ' คือ ' . $number_phone);
+
+                    } else if (strpos($receiveText, 'สภาพภูมิอากาศ') !== false) {
+
+//                        $url = 'http://data.tmd.go.th/api/WeatherWarningNews/v1/?uid=u60pongniwat.w&ukey=4643b5996103347437e6c710bd14f8a9&format=json';
+                        $url = 'http://data.tmd.go.th/api/WeatherForecastDaily/V1/?type=json';
+
+                        $ch = curl_init();
+                        // Disable SSL verification
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        // Will return the response, if false it print the response
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        // Set the url
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        // Execute
+                        $result = curl_exec($ch);
+                        // Closing
+                        curl_close($ch);
+
+                        $arrayWeather = json_decode($result, true);
+
+
+
+                        if (strpos($receiveText, 'ภาคเหนือ') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศภาคเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
+
+                        }if (strpos($receiveText, 'ภาคตะวันออกเฉียงเหนือ') !== false || strpos($receiveText, 'ภาคอีสาน') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออกเฉียงเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][1]['Description'];
+
+                        }if (strpos($receiveText, 'ภาคกลาง') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศภาคกลาง \n".$arrayWeather['DailyForecast']['RegionsForecast'][2]['Description'];
+
+                        }if (strpos($receiveText, 'ภาคตะวันออก') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออก \n".$arrayWeather['DailyForecast']['RegionsForecast'][3]['Description'];
+
+                        }if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันออก') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออก \n".$arrayWeather['DailyForecast']['RegionsForecast'][4]['Description'];
+
+                        }if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันตก') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันตก \n".$arrayWeather['DailyForecast']['RegionsForecast'][5]['Description'];
+
+                        }if (strpos($receiveText, 'กรุงเทพ') !== false) {
+                           $textMessageBuilder = "สภาพภูมิอากาศกรุงเทพ \n".$arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
+
+                        }else{
+                            $textMessageBuilder = $arrayWeather['DailyForecast']['DescTh'];
+                        }
+
 
                     }
 
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
-
 
 
                     $response = $bot->replyMessage($replyToken, $textMessageBuilder);
