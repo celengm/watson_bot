@@ -504,7 +504,7 @@ if (!is_null($events['events'])) {
 
                         $arrayWeather = json_decode($result, true);
 
-                        $textMessageRespones = "สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n";
+                        $textMessageRespones = 'วันที่ '.date('d/m/Y')."\n สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n";
 
                         $textMessageRespones = $arrayWeather['DailyForecast']['DescTh'];
 
