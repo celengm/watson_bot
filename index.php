@@ -532,6 +532,7 @@ if (!is_null($events['events'])) {
 
                         }
 
+                        $textMessageRespones .= "\n"."จากกรมอุตุนิยมวิทยา \n น้องสไมล์พยากรณ์อากาศ ขอบคุณจ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
