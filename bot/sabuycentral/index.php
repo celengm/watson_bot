@@ -3,9 +3,7 @@ date_default_timezone_set("Asia/Bangkok");
 require_once '../../config/connection.php';
 
 
-
-//$url = 'http://data.tmd.go.th/api/WeatherWarningNews/v1/?uid=u60pongniwat.w&ukey=4643b5996103347437e6c710bd14f8a9&format=json';
-$url = 'http://data.tmd.go.th/api/WeatherForecastDaily/V1/?type=json';
+$url = 'https://maps.googleapis.com/maps/api/directions/json?origin=7.9005394,98.3521855&destination=7.9038633,98.4021463&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
 
 $ch = curl_init();
 // Disable SSL verification
@@ -21,12 +19,7 @@ curl_close($ch);
 
 $arrayWeather = json_decode($result, true);
 
-// echo '<pre>'.print_r($arrayWeather['DailyForecast']['RegionsForecast'][0]['RegionName']).'</pre>';
-//$textMessageBuilder = "สภาพภูมิอากาศภาคเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
-$textMessageBuilder = "สภาพภูมิอากาศกรุงเทพ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
-
-echo $textMessageBuilder;
-
+echo $arrayWeather['routes'][0]['legs'][0]['distance']['text'];
 /*$exampleText = '1+1=เท่าไหร่?';
 
 if(strpos($exampleText, '=เท่าไหร่?') !== false){

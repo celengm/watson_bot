@@ -504,8 +504,7 @@ if (!is_null($events['events'])) {
 
                         $arrayWeather = json_decode($result, true);
 
-                        $textMessageRespones = 'วันที่ '.date('d/m/Y')."\n สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n\n\n";
-
+                        $textMessageRespones = 'วันที่ ' . date('d/m/Y') . "\n สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n\n\n";
 
 
                         if (strpos($receiveText, 'ภาคเหนือ') !== false) {
@@ -529,12 +528,12 @@ if (!is_null($events['events'])) {
                         } else if (strpos($receiveText, 'กรุงเทพ') !== false) {
                             $textMessageRespones .= "สภาพภูมิอากาศกรุงเทพ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
 
-                        }else{
+                        } else {
                             $textMessageRespones .= $arrayWeather['DailyForecast']['DescTh'];
 
                         }
 
-                        $textMessageRespones .= "\n"."จากกรมอุตุนิยมวิทยา \n น้องสไมล์พยากรณ์อากาศ \nขอบคุณจ้า";
+                        $textMessageRespones .= "\n" . "จากกรมอุตุนิยมวิทยา \n น้องสไมล์พยากรณ์อากาศ \nขอบคุณจ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
@@ -546,6 +545,40 @@ if (!is_null($events['events'])) {
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
 
 
+                    $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+                    break;
+
+                case 'location':
+
+                    $latigude = $event['message']['latitude'];
+                    $longtigude = $event['message']['longitude'];
+
+                    $url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.8751929,98.3635038&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
+
+                    $ch = curl_init();
+                    // Disable SSL verification
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    // Will return the response, if false it print the response
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    // Set the url
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    // Execute
+                    $result = curl_exec($ch);
+                    // Closing
+                    curl_close($ch);
+
+                    $arrayWeather = json_decode($result, true);
+
+                    echo $arrayWeather['routes'][0]['legs'][0]['distance']['text'];
+
+                    $textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
+                    $textMessageBuilder = "ตอนนี้คุณอยู่ที่".$arrayWeather['routes'][0]['legs'][0]['start_address']['text'] ."\n";
+                    $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
+                    $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
+
+
+                    $httpClient = new CurlHTTPClient($channel_token);
+                    $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
                     $response = $bot->replyMessage($replyToken, $textMessageBuilder);
                     break;
             }
