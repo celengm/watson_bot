@@ -82,14 +82,18 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $nameCheckin = 'แอ๋ม';
     }
 
-    $sqlCheckin = "INSERT INTO users(nick_name,checkin_at,id_line) VALUES (:myname,:mydate,:my_idline)";
-    $saveAnswer = $db_connection->prepare($sqlCheckin);
-    $saveAnswer->bindValue(':myname', $nameCheckin);
-    $saveAnswer->bindValue(':my_idline', $user_line_id);
-    $saveAnswer->bindValue(':mydate', $dateCheckin);
-    $saveAnswer->execute();
+    if(!empty($nameCheckin)){
+        $sqlCheckin = "INSERT INTO users(nick_name,checkin_at,id_line) VALUES (:myname,:mydate,:my_idline)";
+        $saveAnswer = $db_connection->prepare($sqlCheckin);
+        $saveAnswer->bindValue(':myname', $nameCheckin);
+        $saveAnswer->bindValue(':my_idline', $user_line_id);
+        $saveAnswer->bindValue(':mydate', $dateCheckin);
+        $saveAnswer->execute();
 
-    return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));
+        return $textMessageBuilder = new TextMessageBuilder('สวัสดีค่ะคุณ'.$nameCheckin.' เช็คอินที่เวลา ' . date('H:i'));
+    }
+
+
 }
 
 
