@@ -23,7 +23,7 @@ $arrayWeather = json_decode($result, true);
 
 // echo '<pre>'.print_r($arrayWeather['DailyForecast']['RegionsForecast'][0]['RegionName']).'</pre>';
 //$textMessageBuilder = "สภาพภูมิอากาศภาคเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
-$textMessageBuilder = $arrayWeather['DailyForecast']['DescTh'];
+$textMessageBuilder = "สภาพภูมิอากาศกรุงเทพ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
 
 echo $textMessageBuilder;
 
