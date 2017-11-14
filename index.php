@@ -504,7 +504,7 @@ if (!is_null($events['events'])) {
 
                         $arrayWeather = json_decode($result, true);
 
-                        $textMessageRespones = 'วันที่ '.date('d/m/Y')."\n สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n";
+                        $textMessageRespones = 'วันที่ '.date('d/m/Y')."\n สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n\n\n";
 
                         $textMessageRespones .= $arrayWeather['DailyForecast']['DescTh'];
 
@@ -532,7 +532,7 @@ if (!is_null($events['events'])) {
 
                         }
 
-                        $textMessageRespones .= "\n"."จากกรมอุตุนิยมวิทยา \n น้องสไมล์พยากรณ์อากาศ ขอบคุณจ้า";
+                        $textMessageRespones .= "\n"."จากกรมอุตุนิยมวิทยา \n น้องสไมล์พยากรณ์อากาศ \nขอบคุณจ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
