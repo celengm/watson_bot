@@ -506,7 +506,6 @@ if (!is_null($events['events'])) {
 
                         $textMessageRespones = 'วันที่ '.date('d/m/Y')."\n สภาพภูมิอากาศประเทศไทย 24 ชั่วโมงข้างหน้าจ้า \n\n\n";
 
-                        $textMessageRespones .= $arrayWeather['DailyForecast']['DescTh'];
 
 
                         if (strpos($receiveText, 'ภาคเหนือ') !== false) {
@@ -529,6 +528,9 @@ if (!is_null($events['events'])) {
 
                         } else if (strpos($receiveText, 'กรุงเทพ') !== false) {
                             $textMessageRespones .= "สภาพภูมิอากาศกรุงเทพ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
+
+                        }else{
+                            $textMessageRespones .= $arrayWeather['DailyForecast']['DescTh'];
 
                         }
 
