@@ -7,33 +7,26 @@ require_once '../../config/connection.php';
 //$url = 'http://data.tmd.go.th/api/WeatherWarningNews/v1/?uid=u60pongniwat.w&ukey=4643b5996103347437e6c710bd14f8a9&format=json';
 $url = 'http://data.tmd.go.th/api/WeatherForecastDaily/V1/?type=json';
 
-
 $ch = curl_init();
 // Disable SSL verification
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // Will return the response, if false it print the response
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 // Set the url
-curl_setopt($ch, CURLOPT_URL,$url);
+curl_setopt($ch, CURLOPT_URL, $url);
 // Execute
-$result=curl_exec($ch);
+$result = curl_exec($ch);
 // Closing
 curl_close($ch);
-
-// Will dump a beauty json :3
-/*echo '<pre>';
-print_r((json_decode($result, true)));
-echo '</pre>';*/
 
 $arrayWeather = json_decode($result, true);
 
 // echo '<pre>'.print_r($arrayWeather['DailyForecast']['RegionsForecast'][0]['RegionName']).'</pre>';
-foreach ($arrayWeather['DailyForecast']['RegionsForecast'] as $key => $value){
-    if($value['RegionName'] == 'ภาคเหนือ'){
-        echo '1';
-    }
+//$textMessageBuilder = "สภาพภูมิอากาศภาคเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
+$textMessageBuilder = $arrayWeather['DailyForecast']['DescTh'];
 
-}
+echo $textMessageBuilder;
+
 /*$exampleText = '1+1=เท่าไหร่?';
 
 if(strpos($exampleText, '=เท่าไหร่?') !== false){

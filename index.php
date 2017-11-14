@@ -505,31 +505,31 @@ if (!is_null($events['events'])) {
                         $arrayWeather = json_decode($result, true);
 
 
-
                         if (strpos($receiveText, 'ภาคเหนือ') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศภาคเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
+                            $textMessageBuilder = "สภาพภูมิอากาศภาคเหนือ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
 
-                        }if (strpos($receiveText, 'ภาคตะวันออกเฉียงเหนือ') !== false || strpos($receiveText, 'ภาคอีสาน') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออกเฉียงเหนือ \n".$arrayWeather['DailyForecast']['RegionsForecast'][1]['Description'];
+                        } else if (strpos($receiveText, 'ภาคตะวันออกเฉียงเหนือ') !== false || strpos($receiveText, 'ภาคอีสาน') !== false) {
+                            $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออกเฉียงเหนือ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][1]['Description'];
 
-                        }if (strpos($receiveText, 'ภาคกลาง') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศภาคกลาง \n".$arrayWeather['DailyForecast']['RegionsForecast'][2]['Description'];
+                        } else if (strpos($receiveText, 'ภาคกลาง') !== false) {
+                            $textMessageBuilder = "สภาพภูมิอากาศภาคกลาง \n" . $arrayWeather['DailyForecast']['RegionsForecast'][2]['Description'];
 
-                        }if (strpos($receiveText, 'ภาคตะวันออก') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออก \n".$arrayWeather['DailyForecast']['RegionsForecast'][3]['Description'];
+                        } else if (strpos($receiveText, 'ภาคตะวันออก') !== false) {
+                            $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][3]['Description'];
 
-                        }if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันออก') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออก \n".$arrayWeather['DailyForecast']['RegionsForecast'][4]['Description'];
+                        } else if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันออก') !== false) {
+                            $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันออก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][4]['Description'];
 
-                        }if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันตก') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันตก \n".$arrayWeather['DailyForecast']['RegionsForecast'][5]['Description'];
+                        } else if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันตก') !== false) {
+                            $textMessageBuilder = "สภาพภูมิอากาศภาคตะวันตก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][5]['Description'];
 
-                        }if (strpos($receiveText, 'กรุงเทพ') !== false) {
-                           $textMessageBuilder = "สภาพภูมิอากาศกรุงเทพ \n".$arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
+                        } else if (strpos($receiveText, 'กรุงเทพ') !== false) {
+                            $textMessageBuilder = "สภาพภูมิอากาศกรุงเทพ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
 
-                        }else{
-                            $textMessageBuilder = $arrayWeather['DailyForecast']['DescTh'];
                         }
+
+
+                        $textMessageBuilder = $arrayWeather['DailyForecast']['DescTh'];
 
 
                     }
