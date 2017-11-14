@@ -37,13 +37,13 @@ function validNameCheckIn($receiveText,$user_line_id) {
 
     } else if ($receiveText == 'ปืนเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'ปืน';
+        $nameCheckin = 'ปืนคนดี';
     } else if ($receiveText == 'ตู่เช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'ตู่';
+        $nameCheckin = 'ประธาน ตู่';
     } else if ($receiveText == 'ฟลุ๊คเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'ฟลุ๊ค';
+        $nameCheckin = 'เทพเจ้าท้ายตาราง';
     } else if ($receiveText == 'นาถเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'นาถเด็กเกรียน';
@@ -55,7 +55,7 @@ function validNameCheckIn($receiveText,$user_line_id) {
         $nameCheckin = 'ปิง';
     } else if ($receiveText == 'ต้นเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'ต้น';
+        $nameCheckin = 'ท่านต้น';
     } else if ($receiveText == 'แคทเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'แคท';
