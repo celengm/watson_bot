@@ -550,8 +550,9 @@ if (!is_null($events['events'])) {
 
                 case 'location':
 
-                    $latigude = $event['message']['latitude'];
-                    $longtigude = $event['message']['longitude'];
+                    /*$latigude = $event['message']['latitude'];
+                    $longtigude = $event['message']['longitude'];*/
+                    $address = $event['message']['address'];
 
                     /*$url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.8751929,98.3635038&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
 
@@ -576,7 +577,7 @@ if (!is_null($events['events'])) {
                     $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
                     $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";*/
 
-                    $textMessageBuilder = new TextMessageBuilder($latigude.' '.$longtigude);
+                    $textMessageBuilder = new TextMessageBuilder($address);
 
                     $httpClient = new CurlHTTPClient($channel_token);
                     $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
