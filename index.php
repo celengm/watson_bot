@@ -80,6 +80,8 @@ function validNameCheckIn($receiveText,$user_line_id) {
     } else if ($receiveText == 'แอ๋มเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'แอ๋ม';
+    }else{
+        return $textMessageBuilder = new TextMessageBuilder('โปรดระบุชื่อในการเช็คอินด้วยจ้าที่รัก');
     }
 
     if(!empty($nameCheckin)){
