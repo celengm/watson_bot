@@ -53,6 +53,9 @@ function validNameCheckIn($receiveText,$user_line_id) {
     } else if ($receiveText == 'ปิงเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'ปิง';
+    } else if ($receiveText == 'ต้นเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'ต้น';
     } else if ($receiveText == 'แคทเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'แคท';
