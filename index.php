@@ -506,6 +506,9 @@ if (!is_null($events['events'])) {
 
                         $textMessageRespones = '';
 
+                        $textMessageRespones = $arrayWeather['DailyForecast']['DescTh'];
+
+
                         if (strpos($receiveText, 'ภาคเหนือ') !== false) {
                             $textMessageRespones = "สภาพภูมิอากาศภาคเหนือ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][0]['Description'];
 
@@ -519,10 +522,10 @@ if (!is_null($events['events'])) {
                             $textMessageRespones = "สภาพภูมิอากาศภาคตะวันออก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][3]['Description'];
 
                         } else if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันออก') !== false) {
-                            $textMessageRespones = "สภาพภูมิอากาศภาคตะวันออก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][4]['Description'];
+                            $textMessageRespones = "สภาพภูมิอากาศภาคใต้ฝั่งตะวันออก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][4]['Description'];
 
                         } else if (strpos($receiveText, 'ภาคใต้ฝั่งตะวันตก') !== false) {
-                            $textMessageRespones = "สภาพภูมิอากาศภาคตะวันตก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][5]['Description'];
+                            $textMessageRespones = "สภาพภูมิอากาศภาคใต้ฝั่งตะวันตก \n" . $arrayWeather['DailyForecast']['RegionsForecast'][5]['Description'];
 
                         } else if (strpos($receiveText, 'กรุงเทพ') !== false) {
                             $textMessageRespones = "สภาพภูมิอากาศกรุงเทพ \n" . $arrayWeather['DailyForecast']['RegionsForecast'][6]['Description'];
@@ -530,7 +533,6 @@ if (!is_null($events['events'])) {
                         }
 
 
-                        $textMessageRespones = $arrayWeather['DailyForecast']['DescTh'];
 
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
