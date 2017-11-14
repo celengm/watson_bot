@@ -2,8 +2,10 @@
 date_default_timezone_set("Asia/Bangkok");
 require_once '../../config/connection.php';
 
-
-$url = 'https://maps.googleapis.com/maps/api/directions/json?origin=7.9005394,98.3521855&destination=7.9038633,98.4021463&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
+$latigude = 7.9005394;
+$longtigude = 98.3521855;
+//$url = 'https://maps.googleapis.com/maps/api/directions/json?origin=7.9005394,98.3521855&destination=7.9038633,98.4021463&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
+$url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.8751929,98.3635038&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
 
 $ch = curl_init();
 // Disable SSL verification
@@ -19,13 +21,14 @@ curl_close($ch);
 
 $arrayWeather = json_decode($result, true);
 
+echo $result;
 
-$textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
+/*$textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
 $textMessageBuilder .= "ตอนนี้คุณอยู่ที่".$arrayWeather['routes'][0]['legs'][0]['start_address'] ."\n";
 $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
 $textMessageBuilder .= "ใช้เวลาโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
 
-echo $textMessageBuilder;
+echo $textMessageBuilder;*/
 /*$exampleText = '1+1=เท่าไหร่?';
 
 if(strpos($exampleText, '=เท่าไหร่?') !== false){
