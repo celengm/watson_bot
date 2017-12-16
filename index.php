@@ -628,11 +628,17 @@ if (!is_null($events['events'])) {
 
                             if($index == 1){
                                 $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name . ' ... คุณคือแชมป์จ้า ^^' . "\n";
+                                $index++;
+
+                            }else{
+
+                                $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name  . "\n";
+
                             }
 
-                            $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name  . "\n";
 
-                            $index++;
+
+
                         }
 
                         $checkInText .= "\n อย่าทำตัวไม่น่ารักน้าา อิอิ";
