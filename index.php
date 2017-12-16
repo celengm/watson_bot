@@ -22,7 +22,8 @@ $events = json_decode($content, true);
 $textMessageBuilder = '';
 
 
-function update_guanteen($id){
+function update_guanteen($id)
+{
 
     global $db_connection;
 
@@ -30,7 +31,7 @@ function update_guanteen($id){
     $queryFindQustion->bindValue(':my_id', $id);
     $queryFindQustion->execute();
     $resultArr = $queryFindQustion->fetch(PDO::FETCH_OBJ);
-    $getPoint =  $resultArr->point;
+    $getPoint = $resultArr->point;
     $getPoint++;
 
     $sqlUpdate = "UPDATE guanteen SET point=:my_point WHERE id=:my_id";
@@ -305,18 +306,39 @@ if (!is_null($events['events'])) {
                         $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("แนะนำเสื้อจากร้าน Sabuy Central เลยจ้า", $carousel);
 
-                    } else if ($receiveText == '/help') {
-                        $respMessage = '
-                                น้องชื่อสไมล์นะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า 
-                                วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ)
-                                - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน) 
-                                - บริษัทอยู่ที่ไหน 
-                                - เที่ยงนี้กินอะไรดี 
-                                - ขอวาร์ปหน่อย 
-                                - ซื้อเสื้อหน่อย 
-                                - สอนสไมล์พูดด้วยนะคะ สอนสไมล์[คำถาม|คำตอบ] เช่น สอนสไมล์[ใครหน้าตาดีที่สุด|คุณวัติจ้า]
-                                - สวัสดีสไมล์สอนพี่ๆหน่อย
-                            ';
+                    } else if ($receiveText == 'คำสั่งสไมล์') {
+                        $respMessage = "
+                                ขอบคุณน้าที่พาเข้ากลุ่ม จ้า \n
+                    น้องชื่อสไมล์นะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า  \n
+                    วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ) \n
+                 - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน)  \n
+                
+                - บริษัทอยู่ที่ไหน  \n
+                
+                - เที่ยงนี้กินอะไรดี  \n
+                
+                - ขอวาร์ปหน่อย  \n
+                
+                - ซื้อเสื้อหน่อย  \n
+                
+                - สอนสไมล์พูดด้วยนะคะ สอนสไมล์[คำถาม|คำตอบ] เช่น สอนสไมล์[ใครหน้าตาดีที่สุด|คุณวัติจ้า] \n
+                
+                - สไมล์ขอสุ่มชื่อสมาชิกหน่อย \n
+                
+                - ข้อมูลเช็คอินวันนี้ \n
+                
+                - ขอเบอร์วัติ , ขอเบอร์พี่ฟลุ๊ค และคนอื่นได้ครับ \n
+                
+                -ขอสภาพภูมิอากาศ \n 
+                
+                -ขอสภาพภูมิอากาศภาคเหนืิอ หริอ ภาคใต้ฝั่งตะวันตก และภาคอื่นๆ \n
+                
+                - ส่งโลเคชั่นคำนวณระยะทาง ถึง ซอฟท์แวร์ปาร์ค \n
+                
+                - เพิ่มคะแนนกวนตีนค่ะ ตัวอย่าง (นาถกวนตีน+1) ให้มีคำว่า กวนตีน+1 อยู่ด้านหลังชื่อเล่นนะคะ \n
+                
+                - ขอคะแนนกวนตีน 
+                            ";
 
                         $textMessageBuilder = new TextMessageBuilder($respMessage);
 
@@ -556,25 +578,25 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
 
-                    }else if (strpos($receiveText, 'กวนตีน+1') !== false) {
+                    } else if (strpos($receiveText, 'กวนตีน+1') !== false) {
 
 
-                        if (strpos($receiveText, 'นาถ') !== false){
+                        if (strpos($receiveText, 'นาถ') !== false) {
 
                             update_guanteen(1);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณนาถ ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'เบียร์') !== false){
+                        } else if (strpos($receiveText, 'เบียร์') !== false) {
 
                             update_guanteen(2);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณเบียร์ ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'แคท') !== false){
+                        } else if (strpos($receiveText, 'แคท') !== false) {
 
                             update_guanteen(3);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณแคท ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'ผึ้ง') !== false){
+                        } else if (strpos($receiveText, 'ผึ้ง') !== false) {
 
                             update_guanteen(4);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณผึ้ง ให้แล้วค่ะ';
@@ -589,22 +611,22 @@ if (!is_null($events['events'])) {
                             update_guanteen(6);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณวัติ ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'กิ่ง') !== false) {
+                        } else if (strpos($receiveText, 'กิ่ง') !== false) {
 
                             update_guanteen(7);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณกิ่ง ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'ฟาริส') !== false) {
+                        } else if (strpos($receiveText, 'ฟาริส') !== false) {
 
                             update_guanteen(8);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณฟาริส ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'ปิง') !== false) {
+                        } else if (strpos($receiveText, 'ปิง') !== false) {
 
                             update_guanteen(9);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณปิง ให้แล้วค่ะ';
 
-                        }else if (strpos($receiveText, 'แยม') !== false) {
+                        } else if (strpos($receiveText, 'แยม') !== false) {
 
                             update_guanteen(10);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณแยม ให้แล้วค่ะ';
@@ -614,29 +636,27 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
 
-                    }else if ($receiveText == 'ขอคะแนนกวนตีน'){
+                    } else if ($receiveText == 'ขอคะแนนกวนตีน') {
 
                         $sqlGetPoint = "SELECT * FROM guanteen ORDER BY point DESC";
                         $querytime = $db_connection->query($sqlGetPoint);
                         $index = 1;
 
-                        $res_text = 'อันดับคะแนนความประพฤติกวนตีนจ้า'."\n";
+                        $res_text = 'อันดับคะแนนความประพฤติกวนตีนจ้า' . "\n";
 
                         while ($row = $querytime->fetch(PDO::FETCH_ASSOC)) {
                             $nick_name = $row['name'];
                             $point = $row['point'];
 
-                            if($index == 1){
-                                $res_text .= 'อันดับที่ '. $index .' ' .$nick_name .' ได้คะแนน = '. $point . ' ... คุณคือแชมป์จ้า ^^' . "\n";
+                            if ($index == 1) {
+                                $res_text .= 'อันดับที่ ' . $index . ' ' . $nick_name . ' ได้คะแนน = ' . $point . ' ... คุณคือแชมป์จ้า ^^' . "\n";
                                 $index++;
 
-                            }else{
+                            } else {
 
-                                $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name  .' ได้คะแนน = '. $point .  "\n";
+                                $res_text .= 'อันดับที่ ' . $index . ' = ' . $nick_name . ' ได้คะแนน = ' . $point . "\n";
                                 $index++;
                             }
-
-
 
 
                         }
@@ -662,7 +682,7 @@ if (!is_null($events['events'])) {
                     $latigude = $event['message']['latitude'];
                     $longtigude = $event['message']['longitude'];
 
-                    $url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.$latigude.','.$longtigude.'&destination=7.874986,98.363149&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
+                    $url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' . $latigude . ',' . $longtigude . '&destination=7.874986,98.363149&language=th&key=AIzaSyDpBieoJxqJvo0DBdD4-1dvDR2Z6PLHu6c';
 
                     $ch = curl_init();
                     // Disable SSL verification
@@ -679,9 +699,9 @@ if (!is_null($events['events'])) {
                     $arrayWeather = json_decode($result, true);
 
                     $textMessageBuilder = "สไมล์คำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
-                    $textMessageBuilder .= "ตอนนี้คุณอยู่ที่".$arrayWeather['routes'][0]['legs'][0]['start_address'] ."\n";
-                    $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค ".$arrayWeather['routes'][0]['legs'][0]['distance']['text']."\n\n";
-                    $textMessageBuilder .= "ใช้เวลาเดินทางด้วยรถโดยประมาณ ".$arrayWeather['routes'][0]['legs'][0]['duration']['text']."ค่ะ \n";
+                    $textMessageBuilder .= "ตอนนี้คุณอยู่ที่" . $arrayWeather['routes'][0]['legs'][0]['start_address'] . "\n";
+                    $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค " . $arrayWeather['routes'][0]['legs'][0]['distance']['text'] . "\n\n";
+                    $textMessageBuilder .= "ใช้เวลาเดินทางด้วยรถโดยประมาณ " . $arrayWeather['routes'][0]['legs'][0]['duration']['text'] . "ค่ะ \n";
 
                     $textMessageBuilder = new TextMessageBuilder($textMessageBuilder);
 
