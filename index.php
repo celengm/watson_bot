@@ -101,9 +101,6 @@ function validNameCheckIn($receiveText, $user_line_id)
     } else if ($receiveText == 'แยมเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'แยม';
-    } else if ($receiveText == 'แอ๋มเช็คอิน') {
-        global $nameCheckin;
-        $nameCheckin = 'แอ๋ม';
     } else {
         return $textMessageBuilder = new TextMessageBuilder('โปรดระบุชื่อในการเช็คอินด้วยจ้าที่รัก');
     }
@@ -308,8 +305,8 @@ if (!is_null($events['events'])) {
                         $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("แนะนำเสื้อจากร้าน Sabuy Central เลยจ้า", $carousel);
 
-                    } else if ($receiveText == 'สวัสดีสไมล์สอนพี่ๆหน่อย') {
-                        $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม จ้า 
+                    } else if ($receiveText == '/help') {
+                        $respMessage = '
                                 น้องชื่อสไมล์นะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า 
                                 วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ)
                                 - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน) 
@@ -565,56 +562,56 @@ if (!is_null($events['events'])) {
                         if (strpos($receiveText, 'นาถ') !== false){
 
                             update_guanteen(1);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณนาถ ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณนาถ ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'เบียร์') !== false){
 
                             update_guanteen(2);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณเบียร์ ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณเบียร์ ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'แคท') !== false){
 
                             update_guanteen(3);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณแคท ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณแคท ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'ผึ้ง') !== false){
 
                             update_guanteen(4);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณผึ้ง ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณผึ้ง ให้แล้วค่ะ';
 
                         } else if (strpos($receiveText, 'ปืน') !== false) {
 
                             update_guanteen(5);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณปืน ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณปืน ให้แล้วค่ะ';
 
                         } else if (strpos($receiveText, 'วัติ') !== false) {
 
                             update_guanteen(6);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณวัติ ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณวัติ ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'กิ่ง') !== false) {
 
                             update_guanteen(7);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณกิ่ง ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณกิ่ง ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'ฟาริส') !== false) {
 
                             update_guanteen(8);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณฟาริส ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณฟาริส ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'ปิง') !== false) {
 
                             update_guanteen(9);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณปิง ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณปิง ให้แล้วค่ะ';
 
                         }else if (strpos($receiveText, 'แยม') !== false) {
 
                             update_guanteen(10);
-                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณแยม ให้แล้วค่ะ';
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณแยม ให้แล้วค่ะ';
 
                         }
 
-
+                        $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
 
                     }
