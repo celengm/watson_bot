@@ -616,8 +616,8 @@ if (!is_null($events['events'])) {
 
                     }else if ($receiveText == 'ขอคะแนนกวนตีน'){
 
-                        $sqlGetDate = "SELECT * FROM guanteen ORDER BY point DESC";
-                        $querytime = $db_connection->query($sqlGetDate);
+                        $sqlGetPoint = "SELECT * FROM guanteen ORDER BY point DESC";
+                        $querytime = $db_connection->query($sqlGetPoint);
                         $index = 1;
 
                         $res_text = 'อันดับคะแนนความประพฤติกวนตีนจ้า'."\n";
