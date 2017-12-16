@@ -21,6 +21,27 @@ $events = json_decode($content, true);
 
 $textMessageBuilder = '';
 
+
+function update_guanteen($id){
+
+    global $db_connection;
+
+    $queryFindQustion = $db_connection->prepare("SELECT point FROM guanteen WHERE id= :my_id");
+    $queryFindQustion->bindValue(':my_id', $id);
+    $queryFindQustion->execute();
+    $resultArr = $queryFindQustion->fetch(PDO::FETCH_OBJ);
+    $getPoint =  $resultArr->point;
+    $getPoint++;
+
+    $sqlUpdate = "UPDATE guanteen SET point=:my_point WHERE id=:my_id";
+    $save = $db_connection->prepare($sqlUpdate);
+    $save->bindValue(':my_point', $getPoint);
+    $save->bindValue(':my_id', $id);
+    $save->execute();
+
+
+}
+
 function validNameCheckIn($receiveText, $user_line_id)
 {
 
@@ -536,6 +557,64 @@ if (!is_null($events['events'])) {
                         $textMessageRespones .= "\n" . "จากกรมอุตุนิยมวิทยา \n น้องสไมล์พยากรณ์อากาศ \nขอบคุณจ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
+
+
+                    }else if (strpos($receiveText, 'กวนตีน+1') !== false) {
+
+
+                        if (strpos($receiveText, 'นาถ') !== false){
+
+                            update_guanteen(1);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณนาถ ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'เบียร์') !== false){
+
+                            update_guanteen(2);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณเบียร์ ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'แคท') !== false){
+
+                            update_guanteen(3);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณแคท ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'ผึ้ง') !== false){
+
+                            update_guanteen(4);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณผึ้ง ให้แล้วค่ะ';
+
+                        } else if (strpos($receiveText, 'ปืน') !== false) {
+
+                            update_guanteen(5);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณปืน ให้แล้วค่ะ';
+
+                        } else if (strpos($receiveText, 'วัติ') !== false) {
+
+                            update_guanteen(6);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณวัติ ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'กิ่ง') !== false) {
+
+                            update_guanteen(7);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณกิ่ง ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'ฟาริส') !== false) {
+
+                            update_guanteen(8);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณฟาริส ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'ปิง') !== false) {
+
+                            update_guanteen(9);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณปิง ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'แยม') !== false) {
+
+                            update_guanteen(10);
+                            $textMessageRespones .= 'เพิ่มคะแนนความกวนตีนของคุณแยม ให้แล้วค่ะ';
+
+                        }
+
+
 
 
                     }
