@@ -627,13 +627,13 @@ if (!is_null($events['events'])) {
                             $point = $row['point'];
 
                             if($index == 1){
-                                $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name . ' ... คุณคือแชมป์จ้า ^^' . "\n";
+                                $res_text .= 'อันดับที่ '. $index .' ' .$nick_name .' ได้คะแนน = '. $point . ' ... คุณคือแชมป์จ้า ^^' . "\n";
                                 $index++;
 
                             }else{
 
-                                $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name  . "\n";
-
+                                $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name  .' ได้คะแนน = '. $point .  "\n";
+                                $index++;
                             }
 
 
