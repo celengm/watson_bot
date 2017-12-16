@@ -614,6 +614,27 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
 
+                    }else if ($receiveText == 'ขอคะแนนกวนตีน'){
+
+                        $sqlGetDate = "SELECT * FROM guanteen ORDER BY point DESC";
+                        $querytime = $db_connection->query($sqlGetDate);
+                        $index = 1;
+
+                        $res_text = 'อันดับคะแนนความประพฤติกวนตีนจ้า'."\n";
+
+                        while ($row = $querytime->fetch(PDO::FETCH_ASSOC)) {
+                            $nick_name = $row['name'];
+                            $point = $row['point'];
+
+                            $res_text .= 'อันดับที่ '. $index .' = ' .$nick_name . ' ... คุณคือแชมป์จ้า ^^' . "\n";
+                            $index++;
+                        }
+
+                        $checkInText .= "\n อย่าทำตัวไม่น่ารักน้าา อิอิ";
+
+                        $textMessageBuilder = new TextMessageBuilder($res_text);
+
+
                     }
 
 
