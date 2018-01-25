@@ -80,7 +80,7 @@ function validNameCheckIn($receiveText, $user_line_id)
         $nameCheckin = 'ท่านต้น';
     } else if ($receiveText == 'แคทเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'แคท';
+        $nameCheckin = 'แคทเจ้าแม่แคที่ ร้อยผัว';
     } else if ($receiveText == 'ผึ้งเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'ผึ้ง';
