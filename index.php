@@ -59,7 +59,7 @@ function validNameCheckIn($receiveText, $user_line_id)
 
     } else if ($receiveText == 'ปืนเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'ปืนคนดี';
+        $nameCheckin = 'ปืนคนดี ศรีสุราษฎร์';
     } else if ($receiveText == 'ตู่เช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'ประธาน ตู่';
@@ -102,7 +102,16 @@ function validNameCheckIn($receiveText, $user_line_id)
     } else if ($receiveText == 'แยมเช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'แยม';
-    } else {
+    } else if ($receiveText == 'หญิงเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'หญิง';
+    }
+    else if ($receiveText == 'เจเช็คอิน') {
+        global $nameCheckin;
+        $nameCheckin = 'เจ';
+    }
+
+    else {
         return $textMessageBuilder = new TextMessageBuilder('โปรดระบุชื่อในการเช็คอินด้วยจ้าที่รัก');
     }
 
