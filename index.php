@@ -68,7 +68,7 @@ function validNameCheckIn($receiveText, $user_line_id)
         $nameCheckin = 'เทพเจ้าท้ายตาราง';
     } else if ($receiveText == 'นาถเช็คอิน') {
         global $nameCheckin;
-        $nameCheckin = 'นาถเด็กเกรียน';
+        $nameCheckin = 'นาถ แดนซ์ซิ่งควีนแห่ง LIANUDOM';
     } else if ($receiveText == 'เบียร์เช็คอิน') {
         global $nameCheckin;
         $nameCheckin = 'เบียร์';
@@ -625,6 +625,16 @@ if (!is_null($events['events'])) {
 
                             update_guanteen(10);
                             $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณแยม ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'หญิง') !== false) {
+
+                            update_guanteen(11);
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณหญิง ให้แล้วค่ะ';
+
+                        }else if (strpos($receiveText, 'เจ') !== false) {
+
+                            update_guanteen(12);
+                            $textMessageRespones = 'เพิ่มคะแนนความกวนตีนของคุณเจ ให้แล้วค่ะ';
 
                         }
 
