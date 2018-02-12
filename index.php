@@ -678,6 +678,13 @@ if (!is_null($events['events'])) {
 
                         $textMessageBuilder = new MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl);
 
+                    } else if($receiveText == 'อุ๋งๆๆ') {
+
+                        $originalContentUrl = 'https://watson-autobot.herokuapp.com/bot/videos/aungaungg.MP4';
+                        $previewImageUrl = 'https://watson-autobot.herokuapp.com/bot/images/preview1.JPG';
+
+                        $textMessageBuilder = new MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl);
+
                     }
 
 
