@@ -28,7 +28,7 @@ if(isset($accToken) && is_string($accToken)){
 $dataToken = $LineLogin->requestAccessToken($_GET, true);
 
 
-
+var_dump($dataToken);
 
 if(!is_null($dataToken) && is_array($dataToken)){
     if(array_key_exists('access_token',$dataToken)){
@@ -43,7 +43,5 @@ if(!is_null($dataToken) && is_array($dataToken)){
 }
 
 
-
-
-$LineLogin->redirect('line_login_lib.php');
+/*$LineLogin->redirect('line_login_lib.php');*/
 ?>

@@ -33,15 +33,15 @@ if($LineLogin->verifyToken($accToken)){
 
 echo "<pre>";
 // Status Token Check with Result
-//$statusToken = $LineLogin->verifyToken($accToken, true);
-//print_r($statusToken);
+$statusToken = $LineLogin->verifyToken($accToken, true);
+print_r($statusToken);
 
 
 //////////////////////////
 echo "<hr>";
 // GET LINE USERID FROM USER PROFILE
-//$userID = $LineLogin->userProfile($accToken);
-//echo $userID;
+$userID = $LineLogin->userProfile($accToken);
+echo $userID;
 
 //////////////////////////
 echo "<hr>";
