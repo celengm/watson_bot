@@ -42,5 +42,5 @@ if(!is_null($dataToken) && is_array($dataToken)){
 }
 
 
-/*$LineLogin->redirect('line_login_lib.php');*/
+$LineLogin->redirect('login_use_lib.php');
 ?>
