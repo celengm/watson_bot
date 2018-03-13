@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("LineLoginLib.php");
+require_once("line_login_lib.php");
 
 // กรณีต้องการตรวจสอบการแจ้ง error ให้เปิด 3 บรรทัดล่างนี้ให้ทำงาน กรณีไม่ ให้ comment ปิดไป
 ini_set('display_errors', 1);
