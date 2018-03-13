@@ -6,11 +6,14 @@ class LineLoginLib
     private $_CALLBACK_URL;
     private $_STATE_KEY = 'random_state_str';
 
+
     public function __construct($_CLIENT_ID,$_CLIENT_SECRET,$_CALLBACK_URL)
     {
         $this->_CLIENT_ID = $_CLIENT_ID;
         $this->_CLIENT_SECRET = $_CLIENT_SECRET;
         $this->_CALLBACK_URL = $_CALLBACK_URL;
+        echo "OK";
+
     }
 
     public function authorize()
