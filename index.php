@@ -144,7 +144,7 @@ if (!is_null($events['events'])) {
                     // Get replyToken
                     $replyToken = $event['replyToken'];
 
-                    if ((strpos($receiveText, 'เช็คอิน') !== false) && $receiveText != 'เฌอปรางขอข้อมูลเช็คอินวันนี้หน่อย' && $receiveText != 'ข้อมูลเช็คอินวันนี้') {
+                    if ((strpos($receiveText, 'เช็คอิน') !== false) && $receiveText != 'แก้วขอข้อมูลเช็คอินวันนี้หน่อย' && $receiveText != 'ข้อมูลเช็คอินวันนี้') {
 
                         $textMessageBuilder = validNameCheckIn($receiveText, $user_line_id);
 
@@ -227,8 +227,8 @@ if (!is_null($events['events'])) {
                         $answerText = [
                             'กินมั้ยคะ',
                             'จะกินกับหนูมั้ยคะ',
-                            'เฌอปราง่อยนะคะ',
-                            'ลองเลยค่ะวันนี้ เฌอปรางแนะนำจ้า'
+                            'แก้ว่อยนะคะ',
+                            'ลองเลยค่ะวันนี้ แก้วแนะนำจ้า'
                         ];
 
                         $random_keys = array_rand($pictureMenu, 1);
@@ -242,8 +242,8 @@ if (!is_null($events['events'])) {
 
                         /*$textMessageBuilder = new ImageMessageBuilder($pictureMenu[$random_keys], $pictureMenu[$random_keys]);*/
 
-                    } else if (strpos($receiveText, 'สอนเฌอปราง') !== false) {
-                        $x_tra = str_replace("สอนเฌอปราง", "", $receiveText);
+                    } else if (strpos($receiveText, 'สอนแก้ว') !== false) {
+                        $x_tra = str_replace("สอนแก้ว", "", $receiveText);
                         $pieces = explode("|", $x_tra);
                         $_question = str_replace("[", "", $pieces[0]);
                         $_answer = str_replace("]", "", $pieces[1]);
@@ -274,7 +274,7 @@ if (!is_null($events['events'])) {
                             $saveAnswer->bindValue(':todaydate', $dateToday);
                             $saveAnswer->execute();
 
-                            $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนเฌอปราง');
+                            $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนแก้ว');
 
                         } else {
                             // เอา ID คำถาม
@@ -288,7 +288,7 @@ if (!is_null($events['events'])) {
                             $saveAnswer->bindValue(':todaydate', $dateToday);
                             $saveAnswer->execute();
 
-                            $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนเฌอปราง');
+                            $textMessageBuilder = new TextMessageBuilder('ขอบคุณนะจ้ะที่ช่วยสอนแก้ว');
 
                         }
 
@@ -315,19 +315,19 @@ if (!is_null($events['events'])) {
                         $carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("แนะนำเสื้อจากร้าน Sabuy Central เลยจ้า", $carousel);
 
-                    } else if ($receiveText == 'คำสั่งเฌอปราง') {
+                    } else if ($receiveText == 'คำสั่งแก้ว') {
                         $respMessage = " ขอบคุณน้าที่พาเข้ากลุ่ม จ้า \n
-                น้องชื่อเฌอปรางนะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า  \n
+                น้องชื่อแก้วนะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า  \n
                 วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ) \n
 - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน)  \n
 - บริษัทอยู่ที่ไหน  \n
 - เที่ยงนี้กินอะไรดี  \n
 - ขอวาร์ปหน่อย  \n
 - ซื้อเสื้อหน่อย  \n
-- สอนเฌอปรางพูดด้วยนะคะ สอนเฌอปราง[คำถาม|คำตอบ] เช่น สอนเฌอปราง[ใครหน้าตาดีที่สุด|คุณวัติจ้า] \n
-- เฌอปรางขอสุ่มชื่อสมาชิกหน่อย \n
+- สอนแก้วพูดด้วยนะคะ สอนแก้ว[คำถาม|คำตอบ] เช่น สอนแก้ว[ใครหน้าตาดีที่สุด|คุณวัติจ้า] \n
+- แก้วขอสุ่มชื่อสมาชิกหน่อย \n
 - ข้อมูลเช็คอินวันนี้ \n
-- ขอเบเฌอปราง์วัติ , ขอเบเฌอปราง์พี่ฟลุ๊ค และคนอื่นได้ครับ \n
+- ขอเบแก้ว์วัติ , ขอเบแก้ว์พี่ฟลุ๊ค และคนอื่นได้ครับ \n
 - ขอสภาพภูมิอากาศ \n 
 - ขอสภาพภูมิอากาศภาคเหนือ หริอ ภาคใต้ฝั่งตะวันตก และภาคอื่นๆ \n
 - ส่งโลเคชั่นคำนวณระยะทาง ถึง ซอฟท์แวร์ปาร์ค \n
@@ -414,7 +414,7 @@ if (!is_null($events['events'])) {
                         $textMessageBuilder->add(new TextMessageBuilder('อะไรกันไม่รู้จริงหรอ'))
                             ->add(new TextMessageBuilder('2ไง'));
 
-                    } else if ($receiveText == 'เฌอปรางขอข้อมูลเช็คอินวันนี้หน่อย' || $receiveText == 'ข้อมูลเช็คอินวันนี้') {
+                    } else if ($receiveText == 'แก้วขอข้อมูลเช็คอินวันนี้หน่อย' || $receiveText == 'ข้อมูลเช็คอินวันนี้') {
 
                         $sqlGetDate = "SELECT users.* FROM users WHERE checkin_at <= now() - interval '-7 hours' AND checkin_at >= now() - interval '7 hours' ORDER BY checkin_at ASC";
                         $querytime = $db_connection->query($sqlGetDate);
@@ -426,11 +426,11 @@ if (!is_null($events['events'])) {
                             $checkInText .= $row['nick_name'] . ' เวลา = ' . date('H:i:s', $timeDate) . "\n";
                         }
 
-                        $checkInText .= "\n เฌอปรางยินดีรับใช้จ้า";
+                        $checkInText .= "\n แก้วยินดีรับใช้จ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($checkInText);
 
-                    } else if ($receiveText == 'เฌอปรางขอสุ่มชื่อสมาชิกหน่อย') {
+                    } else if ($receiveText == 'แก้วขอสุ่มชื่อสมาชิกหน่อย') {
 
                         $nameUser = [
                             'วัติ',
@@ -455,7 +455,7 @@ if (!is_null($events['events'])) {
                         $random_keys = array_rand($nameUser, 1);
                         $textMessageBuilder = new TextMessageBuilder('ชื่อที่ออกได้แก่ แท่นแท๊นแต้น คุณ ' . $nameUser[$random_keys] . ' จ้า');
 
-                    } else if (strpos($receiveText, 'ขอเบเฌอปราง์') !== false) {
+                    } else if (strpos($receiveText, 'ขอเบแก้ว์') !== false) {
 
                         $number_phone = 0;
                         $name = '';
@@ -518,7 +518,7 @@ if (!is_null($events['events'])) {
                             $name = 'ไม่มีชื่อในระบบจ้า';
                         }
 
-                        $textMessageBuilder = new TextMessageBuilder('เบเฌอปราง์คุณ ' . $name . ' คือ ' . $number_phone);
+                        $textMessageBuilder = new TextMessageBuilder('เบแก้ว์คุณ ' . $name . ' คือ ' . $number_phone);
 
                     } else if (strpos($receiveText, 'สภาพภูมิอากาศ') !== false) {
 
@@ -568,7 +568,7 @@ if (!is_null($events['events'])) {
 
                         }
 
-                        $textMessageRespones .= "\n" . "จากกรมอุตุนิยมวิทยา \n น้องเฌอปรางพยากรณ์อากาศ \nขอบคุณจ้า";
+                        $textMessageRespones .= "\n" . "จากกรมอุตุนิยมวิทยา \n น้องแก้วพยากรณ์อากาศ \nขอบคุณจ้า";
 
                         $textMessageBuilder = new TextMessageBuilder($textMessageRespones);
 
@@ -717,7 +717,7 @@ if (!is_null($events['events'])) {
 
                     $arrayWeather = json_decode($result, true);
 
-                    $textMessageBuilder = "เฌอปรางคำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
+                    $textMessageBuilder = "แก้วคำนวณระยะเส้นทางให้นะคะ จากจุดตำแหน่งของคุณถึง ซอฟท์แวร์ปาร์ค \n";
                     $textMessageBuilder .= "ตอนนี้คุณอยู่ที่" . $arrayWeather['routes'][0]['legs'][0]['start_address'] . "\n";
                     $textMessageBuilder .= "ระยะที่ห่างจากซอฟท์แวร์ปาร์ค " . $arrayWeather['routes'][0]['legs'][0]['distance']['text'] . "\n\n";
                     $textMessageBuilder .= "ใช้เวลาเดินทางด้วยรถโดยประมาณ " . $arrayWeather['routes'][0]['legs'][0]['duration']['text'] . "ค่ะ \n";
@@ -749,14 +749,14 @@ if (!is_null($events['events'])) {
 
             // Greeting
             $respMessage = 'ขอบคุณน้าที่พาเข้ากลุ่ม จ้า 
-                น้องชื่อเฌอปรางนะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า 
+                น้องชื่อแก้วนะคะ น้องถูกสร้างมาขึ้นเพื่อพูดคุย ขำๆ กับ พี่ๆ เลี่ยนอุดม จ้า 
                 วิธีการใช้งานน้องง่ายมากๆจ้า ตอนนี้น้องมีคำสั่งตามนี้ค่ะ (ไม่ต้องพิมพ์ - นะคะ)
                 - วัติเช็คอิน หรือตามชื่อของพี่ๆได้เลยจ่ะ (ตู่เช็คอิน,ปืนเช็คอิน) 
                 - บริษัทอยู่ที่ไหน 
                 - เที่ยงนี้กินอะไรดี 
                 - ขอวาร์ปหน่อย 
                 - ซื้อเสื้อหน่อย 
-                - สอนเฌอปรางพูดด้วยนะคะ สอนเฌอปราง[คำถาม|คำตอบ] เช่น สอนเฌอปราง[ใครหน้าตาดีที่สุด|คุณวัติจ้า]
+                - สอนแก้วพูดด้วยนะคะ สอนแก้ว[คำถาม|คำตอบ] เช่น สอนแก้ว[ใครหน้าตาดีที่สุด|คุณวัติจ้า]
             ';
 
             $httpClient = new CurlHTTPClient($channel_token);
